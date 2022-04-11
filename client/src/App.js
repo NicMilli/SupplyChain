@@ -158,25 +158,7 @@ class App extends Component {
 //   });
 //   console.log(data)
 // }
-// {this.state.itemNames[0]}
-// <table>
-// <thead>
-//         <tr>
-//             <th>Product Name</th>
-//             <th>Unit Price</th>
-//             <th>Quantity Available</th>
-//         </tr>
-//         </thead>
-// <tbody>
 
-// {this.state.itemNames.map((a, index) => (
-//       <tr>
-//         <td>{a}</td>
-//       </tr>
-// ))}
-
-// </tbody>
-// </table> 
   
   render() {
     
@@ -198,6 +180,25 @@ class App extends Component {
         <h1>Simply Payment/Supply Chain Example!</h1>
         <h2>Products for sale:</h2>
        
+        {this.state.itemNames[0]}
+<table>
+<thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Unit Price</th>
+            <th>Quantity Available</th>
+        </tr>
+        </thead>
+<tbody>
+
+{this.state.itemNames.map((a, index) => (
+      <tr>
+        <td>{a}</td>
+      </tr>
+))}
+
+</tbody>
+</table> 
 
         <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 500, marginRight: 500 }}></div>
         <button id="toggle" type="button" className= 'updates-btn' onClick={this.hideUpdates}>Show/Hide owner section</button>
