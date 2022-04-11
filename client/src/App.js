@@ -26,10 +26,12 @@ const names = [];
 const prices = [];
 const amounts = [];
 const indices = [];
+const address = [];
 
 class App extends Component {
   state = { loaded: false, cost: 0, itemName: "exampleItem1", 
-  quantity: 0, index: 0, uquantity: 0, itemNames: [], costs:[], quantities:[], indices:[]};
+  quantity: 0, index: 0, uquantity: 0, bquantity: 0,
+  itemNames: [], costs:[], quantities:[], indices:[], address:[]};
 
   componentDidMount = async () => {
     try {
@@ -73,8 +75,9 @@ class App extends Component {
        prices[i] = data[1];
        amounts[i] = data[2];
        indices[i] = i;
+       address[i] = data[3];
     }
-       this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices})
+       this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address: address})
   
       //  productMap.set(i, {itemName: data[0], cost: data[1], quantity: data[2]});
       //setValues([...i, {itemName: data[0], cost: data[1], quantity: data[2] }]);
@@ -86,10 +89,10 @@ class App extends Component {
 
     let result = await this.ItemManager.methods.createItem(itemName, cost, quantity).send({ from: this.accounts[0] });
     const index = result.events.ProductStep.returnValues._productIndex;
-    names[index] = itemName; prices[index] = cost; amounts[index] = quantity; indices[index] = index;
+    names[index] = itemName; prices[index] = cost; amounts[index] = quantity; indices[index] = index; address[index] = result.events.ProductStep.returnValues._address;
     
     // productMap.set(index, {itemName: itemName, cost: cost, quantity: quantity});
-    this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices})
+    this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address:address})
     
     alert("Send "+cost+" Wei to "+result.events.ProductStep.returnValues._address);
   };
@@ -125,6 +128,13 @@ class App extends Component {
         alert("Item " + item._identifier + " was paid by " + item._buyerAddress+ " , deliver it now!");
       };
     });
+  }
+
+  buyItem = (ind) => {
+    const { costs, address } = this.state;
+    console.log(address[ind])
+    console.log(costs[ind])
+    this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: costs[ind]});
   }
 
   hideUpdates = () => {
@@ -191,7 +201,7 @@ class App extends Component {
         I have solved this somewhat using bulma css but still get an error:
         Warning: Each child in a list should have a unique "key" prop.
 */}
-<div className="columns">
+<div className="columns is-mobile">
   <div className="column">
 <table>
 <thead>
@@ -200,7 +210,7 @@ class App extends Component {
         </tr>
 </thead>
 <tbody>
-{this.state.itemNames.map((a, key) => (
+{this.state.itemNames.map((a) => (
       <tr>
         <td>{a}</td>
       </tr>
@@ -241,6 +251,26 @@ class App extends Component {
 </tbody>
 </table> 
 </div>
+
+<div className="column">
+<table>
+<thead>
+        <tr>
+            <th>Buy!</th>
+        </tr>
+</thead>
+<tbody>
+{this.state.indices.map((d, key) => (
+      <tr>
+        <td>
+          <button type="button" className='create-btn' onClick={()=>this.buyItem(d)}>Buy!</button>
+          </td>
+      </tr>
+))}
+</tbody>
+</table> 
+</div>
+
 </div>
  
 
