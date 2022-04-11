@@ -179,6 +179,16 @@ class App extends Component {
         <header className='App-header' ><img className='App-logo' src={mylogo} alt="logo"/></header>
         <h1>Simply Payment/Supply Chain Example!</h1>
         <h2>Products for sale:</h2>
+
+        {/*
+        I have tried storing an object in the state which has names, cost, qty. 
+        This worked well but I was unable to access it in here. Storing each in a different array
+        in state I am able to render them in a vertical list format and even got each
+        one in a different columns. Sadly these columns were not the same with as the headings and 
+        I put <td> around <tr> which produced a lot of errors.
+        I want each array to take a column in a table with all columns side by side.
+
+        */}
        
         {this.state.itemNames[0]}
 <table>
