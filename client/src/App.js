@@ -9,6 +9,7 @@ import "./App.css";
 import extension1 from './extension1.png';
 import extension2 from './extension2.png';
 import mylogo from './mylogo.png';
+import 'bulma/css/bulma.min.css';
 
 // const products = [
 //   {index : 0, name: "Name", qty: 0, cost : 100, image : "mylogo"}
@@ -187,25 +188,60 @@ class App extends Component {
         one in a different columns. Sadly these columns were not the same width as the headings and 
         I put <td> around <tr> which produced a lot of errors.
         I want each array to take a column in a table with all columns side by side, width matching that of the heading.
+        I have solved this somewhat using bulma css but still get an error:
+        Warning: Each child in a list should have a unique "key" prop.
 */}
+<div className="columns">
+  <div className="column">
 <table>
 <thead>
         <tr>
-            <th>Product Name</th>
-            <th>Unit Price</th>
-            <th>Quantity Available</th>
+            <th>Product Name:</th>
         </tr>
-        </thead>
+</thead>
 <tbody>
-
-{this.state.itemNames.map((a, index) => (
+{this.state.itemNames.map((a, key) => (
       <tr>
         <td>{a}</td>
       </tr>
 ))}
-
 </tbody>
 </table> 
+</div>
+<div className="column">
+<table>
+<thead>
+        <tr>
+            <th>Unit Price:</th>
+        </tr>
+        </thead>
+<tbody>
+
+{this.state.costs.map((b, key) => (
+      <tr>
+        <td>{b}</td>
+      </tr>
+))}
+</tbody>
+</table> 
+</div>
+<div className="column">
+<table>
+<thead>
+        <tr>
+            <th>Quantity Available:</th>
+        </tr>
+</thead>
+<tbody>
+{this.state.quantities.map((c, key) => (
+      <tr>
+        <td>{c}</td>
+      </tr>
+))}
+</tbody>
+</table> 
+</div>
+</div>
  
 
         <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 500, marginRight: 500 }}></div>
