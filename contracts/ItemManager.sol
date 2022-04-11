@@ -70,11 +70,11 @@ contract ItemManager is Ownable {
         emit ItemStep(_productIndex, buyer, address_index, uint(paymentAuth[buyer]._itemStep[paymentAuth[buyer]._addressIndex]), paymentAuth[buyer]._quantity[paymentAuth[buyer]._addressIndex]); //removed: uint(items[_index]._step)
     }
 
-    function updateQuantity(uint newQuantity, uint itemIndex, uint cost) public onlyOwner {
-        require(cost == products[itemIndex]._priceInWei, "The cost does not match the item index, cannot update quantity"); //Stop malicious actors from creating false supplies.
+    function updateQuantity(uint newQuantity, uint itemIndex) public onlyOwner returns(bool) {
         products[itemIndex]._quantity = newQuantity;
         (bool success, ) = address(products[itemIndex]._product).call(abi.encodeWithSignature("updateQty(uint256)", newQuantity));
         require(success, "Product quantity update failed, please try again");
+        return(success);
     }
 
     function getIndexCount() public view returns(uint) {

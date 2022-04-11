@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import ItemManagerContract from "./contracts/ItemManager.json";
 import ProductSaleContract from "./contracts/ProductSale.json";
 import getWeb3 from "./getWeb3";
-import { useState } from "react";
-import ProductsTable from "./Components/ProductsTable";
+//import { useState } from "react";
+//import ProductsTable from "./Components/ProductsTable";
 
 import "./App.css";
 import extension1 from './extension1.png';
@@ -94,10 +94,16 @@ class App extends Component {
   };
 
   handleUpdate = async () => {
-    const { index, quantity, cost } = this.state;
+    const { index, uquantity } = this.state;
 
-    await this.ItemManager.methods.updateQuantity(quantity, index, cost).send({ from: this.accounts[0] });
-    alert("You updated the available quantity of "+this.itemEvents[index].Name+" to "+quantity);
+    const update = await this.ItemManager.methods.updateQuantity(uquantity, index).send({ from: this.accounts[0] });
+    if(!update){
+      alert("Update unsuccessful, are you the owner?")
+    }
+    amounts[index] = uquantity;
+    this.state.quantities[index] = uquantity;
+    console.log(this.state.quantities)
+    alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+uquantity);
   }
 
   handleInputChange = (event) => {
@@ -124,11 +130,11 @@ class App extends Component {
     var x = document.getElementById('updates');
     if (x.style.display === 'none') {
         x.style.display = 'block';
-    } else {
-        x.style.disply = 'none';
+    } 
+    else {
+        x.style.display = 'none';
        }
-       
-      }
+  }
 
   //  printValues = () => {
   //   for(let [key, value] of productMap){
@@ -152,6 +158,25 @@ class App extends Component {
 //   });
 //   console.log(data)
 // }
+// {this.state.itemNames[0]}
+// <table>
+// <thead>
+//         <tr>
+//             <th>Product Name</th>
+//             <th>Unit Price</th>
+//             <th>Quantity Available</th>
+//         </tr>
+//         </thead>
+// <tbody>
+
+// {this.state.itemNames.map((a, index) => (
+//       <tr>
+//         <td>{a}</td>
+//       </tr>
+// ))}
+
+// </tbody>
+// </table> 
   
   render() {
     
@@ -172,25 +197,7 @@ class App extends Component {
         <header className='App-header' ><img className='App-logo' src={mylogo} alt="logo"/></header>
         <h1>Simply Payment/Supply Chain Example!</h1>
         <h2>Products for sale:</h2>
-        {this.state.itemNames[0]}
-        <table>
-        <thead>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Unit Price</th>
-                    <th>Quantity Available</th>
-                </tr>
-                </thead>
-        <tbody>
-        
-        {this.state.itemNames.map((a, index) => (
-              <tr>
-                <td>{a}</td>
-              </tr>
-        ))}
-        
-        </tbody>
-      </table> 
+       
 
         <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 500, marginRight: 500 }}></div>
         <button id="toggle" type="button" className= 'updates-btn' onClick={this.hideUpdates}>Show/Hide owner section</button>
@@ -204,7 +211,7 @@ class App extends Component {
         <br></br>
 
         <h2>Update Product Quantity</h2>
-        New Quantity: <input type="text" className='input-bx' name="quantity" value={this.state.index} onChange={this.handleInputChange} />
+        Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
         New Quantity: <input type="text" className='input-bx' name="uquantity" value={this.state.uquantity} onChange={this.handleInputChange} />
         <button type="button" className='qty-btn' onClick={this.handleUpdate}>Update Quantity</button>
         </div>
