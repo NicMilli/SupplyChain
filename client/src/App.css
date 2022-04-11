@@ -1,0 +1,66 @@
+.App {
+  text-align: center;
+  color: black;
+  background-color: #e6be8a;
+}
+
+.App-logo {
+  height: 20vmin;
+}
+
+.App-header {
+  background-color: #58daf1;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-footer {
+  background-color: #58daf1;
+  text-align: right;
+  color: black;
+  margin-top: 10%;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.create-btn {
+  background-color: #09d3ac;
+  cursor: pointer; 
+  font-size: 15px;
+  border-radius: 44px;
+  border: 2px solid #2e2f33;
+  margin-left: 2px;
+}
+
+.updates-btn {
+  background-color: #a32f1b;
+  cursor: pointer; 
+  font-size: 15px;
+  border-radius: 44px;
+  border: 2px solid #090a0a;
+}
+
+.qty-btn {
+  background-color: #e8621a;
+  cursor: pointer; 
+  font-size: 15px;
+  border-radius: 44px;
+  border: 2px solid #090a0a;
+  margin-left: 2px;
+}
+
+.input-bx {
+  background-color: #58daf1;
+}
+
+#updates {
+  display: none;
+}
+
