@@ -19,7 +19,7 @@ import mylogo from './mylogo.png';
 // ]
 // var items = [{itemName: "woo", cost:0, quantity: 0}];
 // var productEvents = [{index: items}];
-const productMap = new Map();
+//const productMap = new Map();
 // const el = [];
 const names = [];
 const prices = [];
@@ -54,7 +54,7 @@ class App extends Component {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.listenToPaymentEvent();
-      this.setState({ loaded:true }, this.getProducts, this.printValues);
+      this.setState({ loaded:true }, this.getProducts);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -184,16 +184,9 @@ class App extends Component {
         <tbody>
         
         {this.state.itemNames.map((a, index) => (
-              <tr>Product Name:</tr>
-              <tr>{a}</tr>
-        ))}
-        
-        {this.state.costs.map((b, index) => (
-              <tr>{b}</tr>
-        ))}
-        
-        {this.state.quantities.map((c, index) => (
-              <tr>{c}</tr>
+              <tr>
+                <td>{a}</td>
+              </tr>
         ))}
         
         </tbody>
