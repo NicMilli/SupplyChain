@@ -187,10 +187,7 @@ class App extends Component {
         one in a different columns. Sadly these columns were not the same width as the headings and 
         I put <td> around <tr> which produced a lot of errors.
         I want each array to take a column in a table with all columns side by side, width matching that of the heading.
-
-        */}
-       
-        {this.state.itemNames[0]}
+*/}
 <table>
 <thead>
         <tr>
@@ -209,6 +206,7 @@ class App extends Component {
 
 </tbody>
 </table> 
+ 
 
         <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 500, marginRight: 500 }}></div>
         <button id="toggle" type="button" className= 'updates-btn' onClick={this.hideUpdates}>Show/Hide owner section</button>
