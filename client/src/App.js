@@ -105,7 +105,7 @@ class App extends Component {
       alert("Update unsuccessful, are you the owner?")
     }
     amounts[index] = uquantity;
-    this.state.quantities[index] = uquantity;
+    this.setState({quantities: amounts})
     console.log(this.state.quantities)
     alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+uquantity);
   }
@@ -130,11 +130,11 @@ class App extends Component {
     });
   }
 
-  buyItem = (ind) => {
+  buyItem =async(ind) => {
     const { costs, address } = this.state;
     console.log(address[ind])
     console.log(costs[ind])
-    this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: costs[ind]});
+    await this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: costs[ind]});
   }
 
   hideUpdates = () => {
