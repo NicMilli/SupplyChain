@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ItemManagerContract from "./contracts/ItemManager.json";
 import ProductSaleContract from "./contracts/ProductSale.json";
 import getWeb3 from "./getWeb3";
-//import { useState } from "react";
+import { useState } from "react";
 //import ProductsTable from "./Components/ProductsTable";
 
 import "./App.css";
