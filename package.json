@@ -1,6 +1,11 @@
 {
   "dependencies": {
     "@openzeppelin/contracts": "^4.5.0",
-    "bulma": "^0.9.3"
+    "@truffle/hdwallet-provider": "^2.0.6",
+    "bulma": "^0.9.3",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
