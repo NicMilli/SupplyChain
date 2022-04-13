@@ -19,20 +19,23 @@ contract ProductSale {
 
     uint numberPaid;
     //uint qty = _quantity;
+    event test(uint num, uint qty, address ctrct);
 
     receive() external payable {
-        require(msg.value == priceInWei, "Sorry, partial payments are not supported");
-        require(paidWei % priceInWei == 0, "This item has already been paid for!");
-        require(quantity != 0, "Sorry, this item is temporarily sold out");
+        ////require(msg.value == priceInWei, "Sorry, partial payments are not supported");
+        require(paidWei % priceInWei == 0, "Sorry, partial payments are not accepted!");
+       
         paidWei += msg.value;
         numberPaid = msg.value/priceInWei;
+        require(quantity >= numberPaid, "Sorry, there is not enough stock to fulfill this order");
         quantity -= numberPaid;
+         
         (bool success, ) = address(parentContract).call{value:msg.value}(abi.encodeWithSignature("triggerPayment(uint256, uint256, address)", index, numberPaid, msg.sender));
         require(success, "Payment processing failed, please contact the owner");
     }
 
     function updateQty(uint newQty) public {
-        require(address(parentContract) == msg.sender, "Only the master contract can update item quantity");
+        require(address(parentContract) == msg.sender, "Only the ItemManager contract can update item quantity");
         quantity = newQty;
     }
 

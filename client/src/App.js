@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import ItemManagerContract from "./contracts/ItemManager.json";
 import ProductSaleContract from "./contracts/ProductSale.json";
 import getWeb3 from "./getWeb3";
-import { useState } from "react";
-//import ProductsTable from "./Components/ProductsTable";
 
 import "./App.css";
 import extension1 from './extension1.png';
@@ -11,17 +9,7 @@ import extension2 from './extension2.png';
 import mylogo from './mylogo.png';
 import 'bulma/css/bulma.min.css';
 
-// const products = [
-//   {index : 0, name: "Name", qty: 0, cost : 100, image : "mylogo"}
-// ]
-
-// const itemEvents = [
-//   {index : 0, product : products[0]} // step = added || paid || delivered
-// ]
-// var items = [{itemName: "woo", cost:0, quantity: 0}];
-// var productEvents = [{index: items}];
 //const productMap = new Map();
-// const el = [];
 const names = [];
 const prices = [];
 const amounts = [];
@@ -124,7 +112,7 @@ class App extends Component {
     let self = this;
     this.ItemManager.events.ItemStep().on("data", async function(evt) {
       if(evt.returnValues._itemStep === 0) {
-        let item = await self.IitemManager.methods.items(evt.returnValues._itemIndex).call();
+        let item = await self.ItemManager.methods.items(evt.returnValues._itemIndex).call();
         alert("Item " + item._identifier + " was paid by " + item._buyerAddress+ " , deliver it now!");
       };
     });
@@ -132,9 +120,12 @@ class App extends Component {
 
   buyItem =async(ind) => {
     const { costs, address } = this.state;
-    console.log(address[ind])
-    console.log(costs[ind])
+    //await this.ItemManager.methods.triggerPayment(ind, 1, this.accounts[0]).send({ from: this.accounts[0] });
     await this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: costs[ind]});
+    let data =  await this.ItemManager.methods.productData(ind).call({ from: this.accounts[0] });
+    amounts[ind] = data[2];
+    this.setState({quantities: amounts});
+    //await this.ItemManager.methods.triggerPayment(0,1,this.accounts[0]).send({ from: this.accounts[0] });
   }
 
   hideUpdates = () => {
