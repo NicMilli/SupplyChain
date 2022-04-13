@@ -197,7 +197,7 @@ class App extends Component {
 <table>
 <thead>
         <tr>
-            <th className="has-background-danger has-text-black-bis ">Product Name:</th>
+            <th className="bd-notification has-background-danger has-text-black-bis ">Product Name:</th>
         </tr>
 </thead>
 <tbody>
@@ -213,7 +213,7 @@ class App extends Component {
 <table>
 <thead>
         <tr>
-            <th className="has-background-danger has-text-black-bis">Unit Price:</th>
+            <th className="bd-notification has-background-danger has-text-black-bis">Unit Price:</th>
         </tr>
         </thead>
 <tbody>
@@ -230,7 +230,7 @@ class App extends Component {
 <table>
 <thead>
         <tr>
-            <th className="has-background-danger has-text-black-bis">Quantity Available:</th>
+            <th className="bd-notification has-background-danger has-text-black-bis">Quantity Available:</th>
         </tr>
 </thead>
 <tbody>
@@ -247,7 +247,7 @@ class App extends Component {
 <table>
 <thead>
         <tr>
-            <th className="has-background-success has-text-black-bis">Buy!</th>
+            <th className="bd-notification has-background-success has-text-black-bis">Buy!</th>
         </tr>
 </thead>
 <tbody>
