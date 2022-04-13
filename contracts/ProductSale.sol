@@ -36,7 +36,7 @@ contract ProductSale {
         quantity = newQty;
     }
 
-    fallback () external {
+     fallback () external payable {
 
-    }
+     }
 }
