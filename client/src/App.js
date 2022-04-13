@@ -197,7 +197,7 @@ class App extends Component {
 <table>
 <thead>
         <tr>
-            <th>Product Name:</th>
+            <th className="has-background-danger">Product Name:</th>
         </tr>
 </thead>
 <tbody>
@@ -213,7 +213,7 @@ class App extends Component {
 <table>
 <thead>
         <tr>
-            <th>Unit Price:</th>
+            <th className="has-background-danger">Unit Price:</th>
         </tr>
         </thead>
 <tbody>
@@ -230,7 +230,7 @@ class App extends Component {
 <table>
 <thead>
         <tr>
-            <th>Quantity Available:</th>
+            <th className="has-background-danger">Quantity Available:</th>
         </tr>
 </thead>
 <tbody>
@@ -247,7 +247,7 @@ class App extends Component {
 <table>
 <thead>
         <tr>
-            <th>Buy!</th>
+            <th className="has-background-success">Buy!</th>
         </tr>
 </thead>
 <tbody>
