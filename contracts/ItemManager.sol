@@ -81,8 +81,8 @@ contract ItemManager is Ownable {
         return(index);
     }
 
-    function productData(uint _index) public view returns(string memory, uint, uint, address) {
-        return(products[_index]._identifier, products[_index]._priceInWei, products[_index]._quantity, address(products[_index]._product));
+    function productData(uint _index) public view returns(string memory, uint, uint) {
+        return(products[_index]._identifier, products[_index]._priceInWei, products[_index]._quantity);
     }
 
 }
