@@ -195,9 +195,9 @@ class App extends Component {
 <div className="columns is-mobile">
   <div className="column">
 <table>
-<thead>
+<thead className="bd-notification has-background-info has-text-black-bis ">
         <tr>
-            <th className="bd-notification has-background-danger has-text-black-bis ">Product Name:</th>
+            <th >Product Name:</th>
         </tr>
 </thead>
 <tbody>
@@ -211,9 +211,9 @@ class App extends Component {
 </div>
 <div className="column">
 <table>
-<thead>
+<thead className="bd-notification has-background-info has-text-black-bis">
         <tr>
-            <th className="bd-notification has-background-danger has-text-black-bis">Unit Price:</th>
+            <th >Unit Price:</th>
         </tr>
         </thead>
 <tbody>
@@ -228,9 +228,9 @@ class App extends Component {
 </div>
 <div className="column">
 <table>
-<thead>
+<thead className="bd-notification has-background-info has-text-black-bis">
         <tr>
-            <th className="bd-notification has-background-danger has-text-black-bis">Quantity Available:</th>
+            <th >Quantity Available:</th>
         </tr>
 </thead>
 <tbody>
@@ -245,9 +245,9 @@ class App extends Component {
 
 <div className="column">
 <table>
-<thead>
+<thead className="bd-notification has-background-success has-text-black-bis">
         <tr>
-            <th className="bd-notification has-background-success has-text-black-bis">Buy!</th>
+            <th >Buy!</th>
         </tr>
 </thead>
 <tbody>
