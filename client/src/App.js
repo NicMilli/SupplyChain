@@ -186,7 +186,7 @@ class App extends Component {
 
         <div className='columns is-centered'>
           <div className='column'>
-        <table className="table is-striped is-hoverable" style={{border:'solid'}}>
+        <table className="table is-hoverable" style={{border:'solid'}}>
           <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
               <th >Product Name:</th>
