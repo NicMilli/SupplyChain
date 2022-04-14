@@ -184,9 +184,9 @@ class App extends Component {
         All items are fictional!</p>
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
 
-    <div className='columns is-centered'>
-      <div className='column is-centered'>
-        <table style={{border:'solid'}}>
+    <div className="columns is-centered">
+      <div className="column">
+        <table className="centered" style={{border:'solid'}}>
           <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
               <th >Product Name:</th>

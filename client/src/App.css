@@ -4,6 +4,20 @@
   background-color: #e6be8a;
 }
 
+td {
+  margin-left: 2%;
+  margin-right: 2%
+}
+
+tr{
+  margin-top: 2%;
+  margin-bottom: 2%
+}
+
+.rows {
+  border: #67605a solid;
+}
+
 .tr:hover{
   background-color: #a25010;
 }
