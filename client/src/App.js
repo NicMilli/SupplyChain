@@ -200,7 +200,7 @@ class App extends Component {
 </table> 
 </div>
 <div className="column">
-<table>
+<table className="table">
 <thead className="has-text-black-bis">
         <tr>
             <th >Unit Price:</th>
@@ -217,7 +217,7 @@ class App extends Component {
 </table> 
 </div>
 <div className="column">
-<table>
+<table className="table">
 <thead className="has-text-black-bis">
         <tr>
             <th >Quantity Available:</th>
@@ -234,7 +234,7 @@ class App extends Component {
 </div>
 
 <div className="column">
-<table>
+<table className="table">
 <thead className="has-text-black-bis">
         <tr>
             <th >Buy!</th>
