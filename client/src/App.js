@@ -185,7 +185,7 @@ class App extends Component {
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
 
     <div className='columns is-centered'>
-      <div className='column is-half is-offset-one-quarter'>
+      <div className='column'>
         <table className="table is-hoverable" style={{border:'solid'}}>
           <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
