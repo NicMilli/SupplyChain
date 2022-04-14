@@ -184,9 +184,10 @@ class App extends Component {
         All items are fictional!</p>
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
 
-        <div className='centered' style={{justifyContent: "center"}}>
+        <div className='columns is-centered'>
+          <div className='column'>
         <table className="table is-centered is-striped is-hoverable">
-          <thead className="has-text-black-bis" style={{backgroundColor:"#58daf1"}}>
+          <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
               <th >Product Name:</th>
               <th >Unit Price:</th>
@@ -194,7 +195,7 @@ class App extends Component {
               <th >Buy!</th>
             </tr>
           </thead>
-          <tbody style={{backgroundColor:"#8d4004"}}>
+          <tbody className="has-text-black-bis" style={{backgroundColor:"#8d4004"}}>
             {this.state.indices.map((a) => (
               <tr>
                 <td >{this.state.itemNames[a]}</td>
@@ -207,6 +208,7 @@ class App extends Component {
             ))}
           </tbody>
         </table> 
+        </div>
         </div>
 
         <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 100, marginRight: 100 }}></div>
