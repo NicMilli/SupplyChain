@@ -60,6 +60,11 @@
   background-color: #58daf1;
 }
 
+.center {
+  text-align: center;
+  align-items: center;
+}
+
 #updates {
   display: none;
 }

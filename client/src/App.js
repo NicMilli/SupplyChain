@@ -182,8 +182,8 @@ class App extends Component {
         <h1>Simply Payment/Supply Chain Example!</h1>
         <h2>Products for sale:</h2>
 
-        <div>
-        <table className="table">
+        <div className='centered'>
+        <table className="table is-striped is-hoverable">
           <thead className="has-text-black-bis ">
             <tr>
               <th >Product Name:</th>
