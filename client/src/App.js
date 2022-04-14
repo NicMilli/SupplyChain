@@ -195,7 +195,7 @@ class App extends Component {
 <div className="columns is-mobile is-gapless">
   <div className="column">
 <table>
-<thead className="has-background-info has-text-black-bis ">
+<thead className="has-text-black-bis ">
         <tr>
             <th >Product Name:</th>
         </tr>
@@ -211,7 +211,7 @@ class App extends Component {
 </div>
 <div className="column">
 <table>
-<thead className="bd-notification has-background-info has-text-black-bis">
+<thead className="has-text-black-bis">
         <tr>
             <th >Unit Price:</th>
         </tr>
@@ -228,7 +228,7 @@ class App extends Component {
 </div>
 <div className="column">
 <table>
-<thead className="bd-notification has-background-info has-text-black-bis">
+<thead className="has-text-black-bis">
         <tr>
             <th >Quantity Available:</th>
         </tr>
@@ -245,7 +245,7 @@ class App extends Component {
 
 <div className="column">
 <table>
-<thead className="bd-notification has-background-success has-text-black-bis">
+<thead className="has-text-black-bis">
         <tr>
             <th >Buy!</th>
         </tr>
@@ -253,9 +253,10 @@ class App extends Component {
 <tbody>
 {this.state.indices.map((d, key) => (
       <tr>
-        <td>
+        <td style={{ borderTop: "1px solid #0f0f0f ", borderBottom: "1px solid #0f0f0f "}}>
           <button type="button" className='create-btn' onClick={()=>this.buyItem(d)}>Buy!</button>
         </td>
+        
       </tr>
 ))}
 </tbody>
