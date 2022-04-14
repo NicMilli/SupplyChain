@@ -183,8 +183,10 @@ class App extends Component {
         <p>Please let me know if you would like to see any other items listed!<br></br>
         All items are fictional!</p>
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
-
-        <table className="centered" style={{border:'solid'}}>
+        
+        <br></br>
+        <div className="centered">
+        <table style={{border:'solid'}}>
           <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
               <th >Product Name:</th>
@@ -206,6 +208,8 @@ class App extends Component {
             ))}
           </tbody>
         </table> 
+        </div>
+        <br></br>
 
         <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 100, marginRight: 100 }}></div>
         <button id="toggle" type="button" className= 'updates-btn' onClick={this.hideUpdates}>Show/Hide owner section</button>
