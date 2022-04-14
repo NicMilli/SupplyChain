@@ -197,7 +197,7 @@ class App extends Component {
           </thead>
           <tbody className="has-text-black-bis" style={{backgroundColor:"#8d4004", color:"#a25010"}}>
             {this.state.indices.map((a) => (
-              <tr>
+              <tr className="rows">
                 <td >{this.state.itemNames[a]}</td>
                 <td >{this.state.costs[a]}</td>
                 <td >{this.state.quantities[a]}</td>
