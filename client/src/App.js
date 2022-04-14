@@ -183,7 +183,7 @@ class App extends Component {
         <h2>Products for sale:</h2>
 
 <div className="columns is-mobile is-gapless">
-  <div className="column">
+  <div className="column is-3">
 <table className="table">
 <thead className="has-text-black-bis ">
         <tr>
