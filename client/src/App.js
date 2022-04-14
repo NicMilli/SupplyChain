@@ -195,7 +195,7 @@ class App extends Component {
 <div className="columns is-mobile">
   <div className="column">
 <table>
-<thead className="bd-notification has-background-info has-text-black-bis ">
+<thead className="is-gapless has-background-info has-text-black-bis ">
         <tr>
             <th >Product Name:</th>
         </tr>
@@ -211,7 +211,7 @@ class App extends Component {
 </div>
 <div className="column">
 <table>
-<thead className="bd-notification has-background-info has-text-black-bis">
+<thead className="is-gapless bd-notification has-background-info has-text-black-bis">
         <tr>
             <th >Unit Price:</th>
         </tr>
@@ -228,7 +228,7 @@ class App extends Component {
 </div>
 <div className="column">
 <table>
-<thead className="bd-notification has-background-info has-text-black-bis">
+<thead className="is-gapless bd-notification has-background-info has-text-black-bis">
         <tr>
             <th >Quantity Available:</th>
         </tr>
@@ -245,7 +245,7 @@ class App extends Component {
 
 <div className="column">
 <table>
-<thead className="bd-notification has-background-success has-text-black-bis">
+<thead className="is-gapless bd-notification has-background-success has-text-black-bis">
         <tr>
             <th >Buy!</th>
         </tr>
@@ -255,7 +255,7 @@ class App extends Component {
       <tr>
         <td>
           <button type="button" className='create-btn' onClick={()=>this.buyItem(d)}>Buy!</button>
-          </td>
+        </td>
       </tr>
 ))}
 </tbody>
