@@ -185,7 +185,7 @@ class App extends Component {
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
 
         <div className='centered' style={{justifyContent: "center"}}>
-        <table className="table is-striped is-hoverable">
+        <table className="table is-centered is-striped is-hoverable">
           <thead className="has-text-black-bis" style={{backgroundColor:"#58daf1"}}>
             <tr>
               <th >Product Name:</th>
