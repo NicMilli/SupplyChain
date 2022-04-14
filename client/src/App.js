@@ -179,8 +179,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className='App-header' ><img className='App-logo' src={mylogo} alt="logo"/></header>
-        <h1>Simply Payment/Supply Chain Example!</h1>
-        <h2>Products for sale:</h2>
+        <h1>Simple Payment/Supply Chain Example!</h1>
+        <p>Please let me know if you would like to see any other items listed!<br></br>
+        All items are fictional!</p>
+        <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
 
         <div className='centered'>
         <table className="table is-striped is-hoverable">
