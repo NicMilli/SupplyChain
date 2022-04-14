@@ -192,10 +192,10 @@ class App extends Component {
         I have solved this somewhat using bulma css but still get an error:
         Warning: Each child in a list should have a unique "key" prop.
 */}
-<div className="columns is-mobile">
+<div className="columns is-mobile is-gapless">
   <div className="column">
 <table>
-<thead className="is-gapless has-background-info has-text-black-bis ">
+<thead className="has-background-info has-text-black-bis ">
         <tr>
             <th >Product Name:</th>
         </tr>
@@ -211,7 +211,7 @@ class App extends Component {
 </div>
 <div className="column">
 <table>
-<thead className="is-gapless bd-notification has-background-info has-text-black-bis">
+<thead className="bd-notification has-background-info has-text-black-bis">
         <tr>
             <th >Unit Price:</th>
         </tr>
@@ -228,7 +228,7 @@ class App extends Component {
 </div>
 <div className="column">
 <table>
-<thead className="is-gapless bd-notification has-background-info has-text-black-bis">
+<thead className="bd-notification has-background-info has-text-black-bis">
         <tr>
             <th >Quantity Available:</th>
         </tr>
@@ -245,7 +245,7 @@ class App extends Component {
 
 <div className="column">
 <table>
-<thead className="is-gapless bd-notification has-background-success has-text-black-bis">
+<thead className="bd-notification has-background-success has-text-black-bis">
         <tr>
             <th >Buy!</th>
         </tr>
