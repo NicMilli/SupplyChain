@@ -4,8 +4,8 @@
   background-color: #e6be8a;
 }
 
-.tbody:hover{
-  color: #a25010;
+.tr:hover{
+  background-color: #a25010;
 }
 
 .App-logo {
