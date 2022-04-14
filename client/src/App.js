@@ -184,8 +184,6 @@ class App extends Component {
         All items are fictional!</p>
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
 
-    <div className="columns is-centered">
-      <div className="column">
         <table className="centered" style={{border:'solid'}}>
           <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
@@ -195,7 +193,7 @@ class App extends Component {
               <th >Buy!</th>
             </tr>
           </thead>
-          <tbody className="has-text-black-bis" style={{backgroundColor:"#8d4004", color:"#a25010"}}>
+          <tbody className="has-text-black-bis">
             {this.state.indices.map((a) => (
               <tr className="rows">
                 <td >{this.state.itemNames[a]}</td>
@@ -208,8 +206,6 @@ class App extends Component {
             ))}
           </tbody>
         </table> 
-      </div>
-    </div>
 
         <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 100, marginRight: 100 }}></div>
         <button id="toggle" type="button" className= 'updates-btn' onClick={this.hideUpdates}>Show/Hide owner section</button>

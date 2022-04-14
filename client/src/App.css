@@ -17,6 +17,7 @@ tr{
 
 .rows {
   border: #67605a solid;
+  background-color: #808000;
 }
 
 .rows:hover{
