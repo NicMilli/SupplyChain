@@ -184,7 +184,7 @@ class App extends Component {
         All items are fictional!</p>
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
 
-        <div className='centered'>
+        <div className='centered' style={{justifyContent: "center"}}>
         <table className="table is-striped is-hoverable">
           <thead className="has-text-black-bis ">
             <tr>
