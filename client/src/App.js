@@ -182,19 +182,9 @@ class App extends Component {
         <h1>Simply Payment/Supply Chain Example!</h1>
         <h2>Products for sale:</h2>
 
-        {/*
-        I have tried storing an object in the state which has names, cost, qty. 
-        This worked well but I was unable to access it in here. Storing each in a different array
-        in state I am able to render them in a vertical list format and even got each
-        one in a different columns. Sadly these columns were not the same width as the headings and 
-        I put <td> around <tr> which produced a lot of errors.
-        I want each array to take a column in a table with all columns side by side, width matching that of the heading.
-        I have solved this somewhat using bulma css but still get an error:
-        Warning: Each child in a list should have a unique "key" prop.
-*/}
 <div className="columns is-mobile is-gapless">
   <div className="column">
-<table>
+<table className="table">
 <thead className="has-text-black-bis ">
         <tr>
             <th >Product Name:</th>
@@ -203,7 +193,7 @@ class App extends Component {
 <tbody>
 {this.state.itemNames.map((a) => (
       <tr>
-        <td>{a}</td>
+        <td style={{ borderTop: "1px solid #0f0f0f ", borderBottom: "1px solid #0f0f0f", marginLeft: 0, marginRight: 0}}>{a}</td>
       </tr>
 ))}
 </tbody>
@@ -220,7 +210,7 @@ class App extends Component {
 
 {this.state.costs.map((b, key) => (
       <tr>
-        <td>{b}</td>
+        <td style={{ borderTop: "1px solid #0f0f0f ", borderBottom: "1px solid #0f0f0f", marginLeft: 0, marginRight: 0}}>{b}</td>
       </tr>
 ))}
 </tbody>
@@ -236,7 +226,7 @@ class App extends Component {
 <tbody>
 {this.state.quantities.map((c, key) => (
       <tr>
-        <td>{c}</td>
+        <td style={{ borderTop: "1px solid #0f0f0f ", borderBottom: "1px solid #0f0f0f", marginLeft: 0, marginRight: 0}}>{c}</td>
       </tr>
 ))}
 </tbody>
