@@ -186,7 +186,7 @@ class App extends Component {
 
         <div className='centered' style={{justifyContent: "center"}}>
         <table className="table is-striped is-hoverable">
-          <thead className="has-text-black-bis ">
+          <thead className="has-text-black-bis" style={{backgroundColor:"#58daf1"}}>
             <tr>
               <th >Product Name:</th>
               <th >Unit Price:</th>
@@ -194,7 +194,7 @@ class App extends Component {
               <th >Buy!</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody style={{backgroundColor:"#8d4004"}}>
             {this.state.indices.map((a) => (
               <tr>
                 <td >{this.state.itemNames[a]}</td>
