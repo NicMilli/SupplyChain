@@ -182,79 +182,30 @@ class App extends Component {
         <h1>Simply Payment/Supply Chain Example!</h1>
         <h2>Products for sale:</h2>
 
-<div className="columns is-mobile is-gapless">
-  <div className="column is-3">
-<table className="table">
-<thead className="has-text-black-bis ">
-        <tr>
-            <th >Product Name:</th>
-        </tr>
-</thead>
-<tbody>
-{this.state.itemNames.map((a) => (
-      <tr>
-        <td style={{ borderTop: "1px solid #0f0f0f ", borderBottom: "1px solid #0f0f0f", marginLeft: 0, marginRight: 0}}>{a}</td>
-      </tr>
-))}
-</tbody>
-</table> 
-</div>
-<div className="column is-3">
-<table className="table">
-<thead className="has-text-black-bis">
-        <tr>
-            <th >Unit Price:</th>
-        </tr>
-        </thead>
-<tbody>
-
-{this.state.costs.map((b, key) => (
-      <tr>
-        <td style={{ borderTop: "1px solid #0f0f0f ", borderBottom: "1px solid #0f0f0f", marginLeft: 0, marginRight: 0}}>{b}</td>
-      </tr>
-))}
-</tbody>
-</table> 
-</div>
-<div className="column is-3">
-<table className="table">
-<thead className="has-text-black-bis">
-        <tr>
-            <th >Quantity Available:</th>
-        </tr>
-</thead>
-<tbody>
-{this.state.quantities.map((c, key) => (
-      <tr>
-        <td style={{ borderTop: "1px solid #0f0f0f ", borderBottom: "1px solid #0f0f0f", marginLeft: 0, marginRight: 0}}>{c}</td>
-      </tr>
-))}
-</tbody>
-</table> 
-</div>
-
-<div className="column is-3">
-<table className="table">
-<thead className="has-text-black-bis">
-        <tr>
-            <th >Buy!</th>
-        </tr>
-</thead>
-<tbody>
-{this.state.indices.map((d, key) => (
-      <tr>
-        <td style={{ borderTop: "1px solid #0f0f0f ", borderBottom: "1px solid #0f0f0f", marginLeft: 0, marginRight: 0}}>
-          <button type="button" className='create-btn' onClick={()=>this.buyItem(d)}>Buy!</button>
-        </td>
-        
-      </tr>
-))}
-</tbody>
-</table> 
-</div>
-
-</div>
- 
+        <div>
+        <table className="table">
+          <thead className="has-text-black-bis ">
+            <tr>
+              <th >Product Name:</th>
+              <th >Unit Price:</th>
+              <th >Quantity Available:</th>
+              <th >Buy!</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.indices.map((a) => (
+              <tr>
+                <td >{this.state.itemNames[a]}</td>
+                <td >{this.state.costs[a]}</td>
+                <td >{this.state.quantities[a]}</td>
+                <td >
+                  <button type="button" className='create-btn' onClick={()=>this.buyItem(a)}>Buy!</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table> 
+        </div>
 
         <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 100, marginRight: 100 }}></div>
         <button id="toggle" type="button" className= 'updates-btn' onClick={this.hideUpdates}>Show/Hide owner section</button>
