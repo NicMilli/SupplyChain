@@ -199,7 +199,7 @@ class App extends Component {
 </tbody>
 </table> 
 </div>
-<div className="column">
+<div className="column is-3">
 <table className="table">
 <thead className="has-text-black-bis">
         <tr>
@@ -216,7 +216,7 @@ class App extends Component {
 </tbody>
 </table> 
 </div>
-<div className="column">
+<div className="column is-3">
 <table className="table">
 <thead className="has-text-black-bis">
         <tr>
@@ -233,7 +233,7 @@ class App extends Component {
 </table> 
 </div>
 
-<div className="column">
+<div className="column is-3">
 <table className="table">
 <thead className="has-text-black-bis">
         <tr>
