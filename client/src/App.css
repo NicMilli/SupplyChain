@@ -4,6 +4,10 @@
   background-color: #e6be8a;
 }
 
+.Btable{
+  border: solid;
+}
+
 .App-logo {
   height: 20vmin;
 }

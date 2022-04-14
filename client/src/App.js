@@ -186,7 +186,7 @@ class App extends Component {
 
         <div className='columns is-centered'>
           <div className='column'>
-        <table className="table is-centered is-striped is-hoverable">
+        <table className="table is-centered is-striped is-hoverable" style={{border:'solid'}}>
           <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
               <th >Product Name:</th>
@@ -195,7 +195,7 @@ class App extends Component {
               <th >Buy!</th>
             </tr>
           </thead>
-          <tbody className="has-text-black-bis" style={{backgroundColor:"#8d4004"}}>
+          <tbody className="has-text-black-bis" style={{backgroundColor:"#8d4004", color:"#8d4004"}}>
             {this.state.indices.map((a) => (
               <tr>
                 <td >{this.state.itemNames[a]}</td>
