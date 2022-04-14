@@ -253,7 +253,7 @@ class App extends Component {
 <tbody>
 {this.state.indices.map((d, key) => (
       <tr>
-        <td style={{ borderTop: "1px solid #0f0f0f ", borderBottom: "1px solid #0f0f0f "}}>
+        <td style={{ borderTop: "1px solid #0f0f0f ", borderBottom: "1px solid #0f0f0f", marginLeft: 0, marginRight: 0}}>
           <button type="button" className='create-btn' onClick={()=>this.buyItem(d)}>Buy!</button>
         </td>
         
@@ -266,7 +266,7 @@ class App extends Component {
 </div>
  
 
-        <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 500, marginRight: 500 }}></div>
+        <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 100, marginRight: 100 }}></div>
         <button id="toggle" type="button" className= 'updates-btn' onClick={this.hideUpdates}>Show/Hide owner section</button>
         <div id="updates">
 
