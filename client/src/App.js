@@ -184,8 +184,8 @@ class App extends Component {
         All items are fictional!</p>
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
 
-        <div className='columns is-centered'>
-          <div className='column'>
+    <div className='columns is-centered'>
+      <div className='column is-half is-offset-one-quarter'>
         <table className="table is-hoverable" style={{border:'solid'}}>
           <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
@@ -208,8 +208,8 @@ class App extends Component {
             ))}
           </tbody>
         </table> 
-        </div>
-        </div>
+      </div>
+    </div>
 
         <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 100, marginRight: 100 }}></div>
         <button id="toggle" type="button" className= 'updates-btn' onClick={this.hideUpdates}>Show/Hide owner section</button>
