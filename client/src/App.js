@@ -74,10 +74,11 @@ class App extends Component {
 
   handleSubmit = async () => {
     const { cost, itemName, quantity } = this.state;
+    const integer = Number.isInteger(cost);
     if (itemName in this.state.itemNames) {
       alert("This name already exists, please choose a unique name or update the existing product!")
     }
-    else if(Number.isInteger(cost) == false){
+    else if(!integer){
       alert("Prices are in Wei, please only input whole numbers!")
     }
     else {
