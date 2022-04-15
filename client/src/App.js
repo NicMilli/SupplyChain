@@ -120,12 +120,12 @@ class App extends Component {
 
   buyItem =async(ind) => {
     const { costs, address } = this.state;
+    //var amount = web3.utils.toWei('${costs[ind]}', 'wei'); How to pass cost variable here?
     //await this.ItemManager.methods.triggerPayment(ind, 1, this.accounts[0]).send({ from: this.accounts[0] });
     await this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: costs[ind]});
     let data =  await this.ItemManager.methods.productData(ind).call({ from: this.accounts[0] });
     amounts[ind] = data[2];
     this.setState({quantities: amounts});
-    //await this.ItemManager.methods.triggerPayment(0,1,this.accounts[0]).send({ from: this.accounts[0] });
   }
 
   hideUpdates = () => {
@@ -186,7 +186,7 @@ class App extends Component {
         
         <br></br>
         <div className="centered">
-        <table style={{border:'solid'}}>
+        <table style={{border:'solid',}}>
           <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
               <th >Product Name:</th>
