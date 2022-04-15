@@ -43,7 +43,7 @@ contract ItemManager is Ownable {
     event ProductStep(uint _productIndex, address _address, uint qty); //uint _step removed
     event ItemStep(uint _productIndex, address _buyerAddress, uint buyerIndex, uint qtyBought, uint _itemStep);
 
-    function createItem(string memory _identifier, uint _priceInWei, uint _quantity) public onlyOwner {
+    function createItem(string memory _identifier, uint _priceInWei, uint _quantity) public onlyOwner returns(bool){
         ProductSale product = new ProductSale(this, _priceInWei, index, _quantity);
         products[index]._product = product;
         products[index]._identifier = _identifier;
@@ -51,6 +51,7 @@ contract ItemManager is Ownable {
         products[index]._quantity = _quantity;
         emit ProductStep(index, address(product), _quantity);
         index++;
+        return(true);
     }
 
     function triggerPayment(uint _Ind, uint qty, address buyer) public payable {
@@ -75,6 +76,18 @@ contract ItemManager is Ownable {
     function updateQuantity(uint newQuantity, uint itemIndex) public onlyOwner returns(bool) {
         products[itemIndex]._quantity = newQuantity;
         (bool success, ) = address(products[itemIndex]._product).call(abi.encodeWithSignature("updateQty(uint256)", newQuantity));
+        require(success, "Product quantity update failed, please try again");
+        return(success);
+    }
+
+    function updateName(string memory newName, uint itemIndex) public onlyOwner returns(bool) {
+        products[itemIndex]._identifier = newName;
+        return(true);
+    }
+
+    function updateCost(uint newCost, uint itemIndex) public onlyOwner returns(bool) {
+        products[itemIndex]._priceInWei = newCost;
+        (bool success, ) = address(products[itemIndex]._product).call(abi.encodeWithSignature("update_Cost(uint256)", newCost));
         require(success, "Product quantity update failed, please try again");
         return(success);
     }

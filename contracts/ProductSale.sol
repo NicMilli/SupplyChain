@@ -34,9 +34,14 @@ contract ProductSale {
         require(success, "Payment processing failed, please contact the owner");
     }
 
-    function updateQty(uint newQty) public {
+    function update_Qty(uint newQty) public {
         require(address(parentContract) == msg.sender, "Only the ItemManager contract can update item quantity");
         quantity = newQty;
+    }
+
+    function update_Cost(uint newCost) public {
+        require(address(parentContract) == msg.sender, "Only the ItemManager contract can update item quantity");
+        priceInWei = newCost;
     }
 
      fallback () external payable {

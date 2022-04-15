@@ -8,7 +8,6 @@ import extension1 from './extension1.png';
 import extension2 from './extension2.png';
 import mylogo from './mylogo.png';
 import 'bulma/css/bulma.min.css';
-import When from './When'
 
 //const productMap = new Map();
 const names = [];
@@ -75,7 +74,10 @@ class App extends Component {
 
   handleSubmit = async () => {
     const { cost, itemName, quantity } = this.state;
-
+    if (itemName in this.state.itemNames) {
+      alert("This name already exists, please choose a unique name or update the existing product!")
+    }
+    else {
     let result = await this.ItemManager.methods.createItem(itemName, cost, quantity).send({ from: this.accounts[0] });
     const index = result.events.ProductStep.returnValues._productIndex;
     names[index] = itemName; prices[index] = cost; amounts[index] = quantity; indices[index] = index; address[index] = result.events.ProductStep.returnValues._address;
@@ -84,6 +86,7 @@ class App extends Component {
     this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address:address})
     
     alert("Send "+cost+" Wei to "+result.events.ProductStep.returnValues._address);
+    }
   };
 
   handleUpdate = async () => {
@@ -103,7 +106,7 @@ class App extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
+    
     this.setState({
       [name]: value
     });
@@ -121,12 +124,16 @@ class App extends Component {
 
   buyItem =async(ind) => {
     const { costs, address } = this.state;
-    //var amount = web3.utils.toWei('${costs[ind]}', 'wei'); How to pass cost variable here?
-    //await this.ItemManager.methods.triggerPayment(ind, 1, this.accounts[0]).send({ from: this.accounts[0] });
-    await this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: costs[ind]});
+    if (this.state.quantities[ind] == 0) {
+      alert("Sorry, this item is sold out!")
+    }
+    else {
+    let success = await this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: costs[ind]});
+    if (!success) {alert("Payment unsuccesful")}
     let data =  await this.ItemManager.methods.productData(ind).call({ from: this.accounts[0] });
     amounts[ind] = data[2];
     this.setState({quantities: amounts});
+    }
   }
 
   hideUpdates = () => {
@@ -203,7 +210,8 @@ class App extends Component {
                 <td ><strong>{this.state.costs[a]}</strong></td>
                 <td ><strong>{this.state.quantities[a]}</strong></td>
                 <td >
-                  <button type="button" className='create-btn' onClick={()=>this.buyItem(a)}>Buy!</button>
+                  Qty: <input type="text" className='input-bx' name="qty" value={this.state.bquantity} onChange={this.handleInputChange} />
+                  <button type="button" className='create-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
                 </td>
               </tr>
             ))}
@@ -218,14 +226,14 @@ class App extends Component {
 
         <h2>Add a new product</h2>
         Cost: <input type="text" className='input-bx' name="cost" value={this.state.cost} onChange={this.handleInputChange} />
-        Product Name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
-        Quantity: <input type="text" className='input-bx' name="quantity" value={this.state.quantity} onChange={this.handleInputChange} />
+         Product Name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
+         Quantity: <input type="text" className='input-bx' name="quantity" value={this.state.quantity} onChange={this.handleInputChange} />
         <button type="button" className='create-btn' onClick={this.handleSubmit}>Create new Item</button>
         <br></br>
 
         <h2>Update Product Quantity</h2>
         Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
-        New Quantity: <input type="text" className='input-bx' name="uquantity" value={this.state.uquantity} onChange={this.handleInputChange} />
+         New Quantity: <input type="text" className='input-bx' name="uquantity" value={this.state.uquantity} onChange={this.handleInputChange} />
         <button type="button" className='qty-btn' onClick={this.handleUpdate}>Update Quantity</button>
         </div>
 
