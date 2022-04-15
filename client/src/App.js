@@ -242,7 +242,7 @@ class App extends Component {
                 <td ><strong>{this.state.costs[a]}</strong></td>
                 <td ><strong>{this.state.quantities[a]}</strong></td>
                 <td >
-                  Qty: <input type="text" className='input-bx' name="qty" value={this.state.bquantity} onChange={this.handleInputChange} />
+                  Qty: <input type="text" className='table-input' name="qty" value={this.state.bquantity} onChange={this.handleInputChange} />
                   <button type="button" className='create-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
                 </td>
               </tr>
@@ -265,7 +265,7 @@ class App extends Component {
 
         <h2>Get an item index!</h2>
         Product name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
-        <button type="button" className='qty-btn' onClick={this.getProdInd}>Update Quantity</button>
+        <button type="button" className='qty-btn' onClick={this.getProdInd}>Get Index</button>
         <br></br>
 
         <h2>Update Product Quantity!</h2>

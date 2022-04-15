@@ -85,6 +85,10 @@ tr{
   background-color: #58daf1;
 }
 
+.table-input {
+  background-color: #a25010;
+}
+
 .center {
   align-self:center;
   justify-content: center;
