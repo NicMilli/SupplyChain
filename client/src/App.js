@@ -8,7 +8,7 @@ import extension1 from './extension1.png';
 import extension2 from './extension2.png';
 import mylogo from './mylogo.png';
 import 'bulma/css/bulma.min.css';
-import When from '../components/When'
+import When from './When'
 
 //const productMap = new Map();
 const names = [];
