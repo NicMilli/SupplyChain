@@ -18,7 +18,7 @@ const address = [];
 
 class App extends Component {
   state = { loaded: false, cost: 0, itemName: "exampleItem1", 
-  quantity: 0, index: 0, uquantity: 0, bquantity: 0,
+  quantity: 0, index: 0, uquantity: 0, bquantity: 0, uname: "New Name", ucost: 0,
   itemNames: [], costs:[], quantities:[], indices:[], address:[]};
 
   componentDidMount = async () => {
@@ -89,9 +89,9 @@ class App extends Component {
     }
   };
 
-  handleUpdate = async () => {
+  handleUpdate = async (input) => {
+    if(input=="qty"){
     const { index, uquantity } = this.state;
-
     const update = await this.ItemManager.methods.updateQuantity(uquantity, index).send({ from: this.accounts[0] });
     if(!update){
       alert("Update unsuccessful, are you the owner?")
@@ -99,7 +99,31 @@ class App extends Component {
     amounts[index] = uquantity;
     this.setState({quantities: amounts})
     console.log(this.state.quantities)
-    alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+uquantity);
+    alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.quantities[index]);
+  }
+
+  else if(input=="name"){
+    const { index, uname } = this.state;
+    const oldName = this.state.itemNames[index];
+    const update = await this.ItemManager.methods.updateName(uname, index).send({ from: this.accounts[0] });
+    if(!update){
+      alert("Update unsuccessful, are you the owner?")
+    }
+    names[index] = uquantity;
+    this.setState({ItemNames: names})
+    alert("You updated the name of "+oldName+" to "+this.state.itemNames[index]);
+  }
+
+  else{
+    const { index, ucost } = this.state;
+    const update = await this.ItemManager.methods.updateCost(ucost, index).send({ from: this.accounts[0] });
+    if(!update){
+      alert("Update unsuccessful, are you the owner?")
+    }
+    prices[index] = ucost;
+    this.setState({costs: prices})
+    alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.costs[index]);
+  }
   }
 
   handleInputChange = (event) => {
@@ -145,30 +169,6 @@ class App extends Component {
         x.style.display = 'none';
        }
   }
-
-  //  printValues = () => {
-  //   for(let [key, value] of productMap){
-  //     console.log(value.itemName +':'+ value.cost +':'+ value.quantity)
-  //     return(
-  //       <div>{value.itemName} {value.cost} {value.quantity}</div>
-  //       )
-  //   }
-  //  }
-
-//   printValues = async() => {
-//     await this.getValues;
-//   productMap.forEach((value, key) => {
-//     data.push(
-//       <tr>
-//          <td>{key}</td>
-//         <td>{value.itemName}</td>
-//         <td>{value.cost}</td>
-//       </tr>
-//     );
-//   });
-//   console.log(data)
-// }
-
   
   render() {
     
@@ -224,18 +224,33 @@ class App extends Component {
         <button id="toggle" type="button" className= 'updates-btn' onClick={this.hideUpdates}>Show/Hide owner section</button>
         <div id="updates">
 
-        <h2>Add a new product</h2>
+        <h2>Add a new product!</h2>
         Cost: <input type="text" className='input-bx' name="cost" value={this.state.cost} onChange={this.handleInputChange} />
          Product Name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
          Quantity: <input type="text" className='input-bx' name="quantity" value={this.state.quantity} onChange={this.handleInputChange} />
         <button type="button" className='create-btn' onClick={this.handleSubmit}>Create new Item</button>
         <br></br>
 
-        <h2>Update Product Quantity</h2>
+        <h2>Update Product Quantity!</h2>
         Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
          New Quantity: <input type="text" className='input-bx' name="uquantity" value={this.state.uquantity} onChange={this.handleInputChange} />
-        <button type="button" className='qty-btn' onClick={this.handleUpdate}>Update Quantity</button>
+        <button type="button" className='qty-btn' onClick={()=>this.handleUpdate("qty")}>Update Quantity</button>
+        <br></br>
+
+        <h2>Update Product Name!</h2>
+        Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
+         New Name: <input type="text" className='input-bx' name="uname" value={this.state.uname} onChange={this.handleInputChange} />
+        <button type="button" className='qty-btn' onClick={()=>this.handleUpdate("name")}>Update Quantity</button>
+        <br></br>
+
+        <h2>Update Product Cost!</h2>
+        Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
+         New Cost: <input type="text" className='input-bx' name="ucost" value={this.state.ucost} onChange={this.handleInputChange} />
+        <button type="button" className='qty-btn' onClick={()=>this.handleUpdate("cost")}>Update Quantity</button>
+        <br></br>
         </div>
+
+        
 
         <footer className='App-footer'>Modified by N.Milligan <br></br>
         For Udemy Ethereum Blockchain Developer Bootcamp with Solidity <br></br>
