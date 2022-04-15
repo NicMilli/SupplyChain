@@ -160,6 +160,19 @@ class App extends Component {
     }
   }
 
+  getProdInd = () => {
+    const { itemName, itemNames } = this.state;
+    if(itemName in itemNames){
+    for (i=0; i<=itemNames.length; i++){
+      if (itemNames[i] == itemName){
+        alert("The index of "+itemName+" is "+i);
+      }
+    }}
+    else {
+    alert("The item name was not found")
+    }
+  }
+
   hideUpdates = () => {
     var x = document.getElementById('updates');
     if (x.style.display === 'none') {
@@ -231,6 +244,11 @@ class App extends Component {
         <button type="button" className='create-btn' onClick={this.handleSubmit}>Create new Item</button>
         <br></br>
 
+        <h2>Get an item index!</h2>
+        Product name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
+        <button type="button" className='qty-btn' onClick={this.getprodInd}>Update Quantity</button>
+        <br></br>
+
         <h2>Update Product Quantity!</h2>
         Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
          New Quantity: <input type="text" className='input-bx' name="uquantity" value={this.state.uquantity} onChange={this.handleInputChange} />
@@ -240,13 +258,13 @@ class App extends Component {
         <h2>Update Product Name!</h2>
         Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
          New Name: <input type="text" className='input-bx' name="uname" value={this.state.uname} onChange={this.handleInputChange} />
-        <button type="button" className='qty-btn' onClick={()=>this.handleUpdate("name")}>Update Quantity</button>
+        <button type="button" className='qty-btn' onClick={()=>this.handleUpdate("name")}>Update Name</button>
         <br></br>
 
         <h2>Update Product Cost!</h2>
         Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
          New Cost: <input type="text" className='input-bx' name="ucost" value={this.state.ucost} onChange={this.handleInputChange} />
-        <button type="button" className='qty-btn' onClick={()=>this.handleUpdate("cost")}>Update Quantity</button>
+        <button type="button" className='qty-btn' onClick={()=>this.handleUpdate("cost")}>Update Cost</button>
         <br></br>
         </div>
 
