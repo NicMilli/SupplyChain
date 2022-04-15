@@ -185,7 +185,7 @@ class App extends Component {
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
         
         <br></br>
-        <div >
+        <div className="center">
         <table className="center" style={{border:'solid',}}>
           <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
@@ -204,6 +204,7 @@ class App extends Component {
                 <td >
                   <button type="button" className='create-btn' onClick={()=>this.buyItem(a)}>Buy!</button>
                 </td>
+                
               </tr>
             ))}
           </tbody>
