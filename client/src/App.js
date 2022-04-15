@@ -74,6 +74,7 @@ class App extends Component {
 
   handleSubmit = async () => {
     const { cost, itemName, quantity } = this.state;
+    console.log(typeof(cost))
     const integer = Number.isInteger(cost);
     if (itemName in this.state.itemNames) {
       alert("This name already exists, please choose a unique name or update the existing product!")
@@ -240,7 +241,7 @@ class App extends Component {
             {this.state.indices.map((a) => (
               <tr className="rows">
                 <td ><strong>{this.state.itemNames[a]}</strong></td>
-                <td ><strong>{this.state.costs[a]}</strong></td>
+                <td ><strong>{this.state.costs[a]} Wei</strong></td>
                 <td ><strong>{this.state.quantities[a]}</strong></td>
                 <td >
                   Qty: <input type="text" className='table-input' name="qty" value={this.state.bquantity} onChange={this.handleInputChange} />
