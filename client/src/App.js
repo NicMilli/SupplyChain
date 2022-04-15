@@ -180,7 +180,7 @@ class App extends Component {
 
   getProdInd = () => {
     const { itemName, itemNames } = this.state;
-    if(itemName in itemNames){
+    if(itemNames.includes(itemName)){
     for (let i=0; i<=itemNames.length; i++){
       if (itemNames[i] == itemName){
         alert("The index of "+itemName+" is "+i);
@@ -271,7 +271,7 @@ class App extends Component {
         <h2>Update Product Quantity!</h2>
         Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
         &nbsp;New Quantity: <input type="text" className='input-bx' name="uquantity" value={this.state.uquantity} onChange={this.handleInputChange} />
-        &nbsp;<button type="button" className='qty-btn' onClick={()=>this.handleUpdate("qty")}>Update Quantity</button>
+        &nbsp;<button type="button" className='qty-btn' onClick={()=>this.handleUpdate('qty')}>Update Quantity</button>
         <br></br>
 
         <h2>Update Product Name!</h2>
