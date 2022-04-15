@@ -185,8 +185,8 @@ class App extends Component {
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
         
         <br></br>
-        <div className="centered">
-        <table style={{border:'solid',}}>
+        <div >
+        <table className="centered" style={{border:'solid',}}>
           <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
               <th >Product Name:</th>
@@ -230,7 +230,7 @@ class App extends Component {
 
         <footer className='App-footer'>Modified by N.Milligan <br></br>
         For Udemy Ethereum Blockchain Developer Bootcamp with Solidity <br></br>
-        <a href="https://github.com/NicMilli/SupplyChain">View the source-code on GitHub!</a></footer>
+        <a color='#808000' href="https://github.com/NicMilli/SupplyChain">View the source-code on GitHub!</a></footer>
       </div>
     );
   }
