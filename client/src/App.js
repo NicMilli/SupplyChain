@@ -115,21 +115,21 @@ class App extends Component {
     names[index] = uname;
     this.setState({ItemNames: names})
     alert("You updated the name of "+oldName+" to "+this.state.itemNames[index]);
-  }
+  }}
 
   else{
     const { index, ucost } = this.state;
     if(!Number.isInteger(ucost)){
-      alert("Prices are in Wei, please only input whole numbers!")
+      alert("Prices are in Wei, please only input whole numbers!");
     }
     else{
     const update = await this.ItemManager.methods.updateCost(ucost, index).send({ from: this.accounts[0] });
     if(!update){
-      alert("Update unsuccessful, are you the owner?")
+      alert("Update unsuccessful, are you the owner?");
     }
     else{
     prices[index] = ucost;
-    this.setState({costs: prices})
+    this.setState({costs: prices});
     alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.costs[index]);
   }}
 }
@@ -158,10 +158,10 @@ class App extends Component {
   buyItem =async(ind) => {
     const { costs, address, bquantity } = this.state;
     if (this.state.quantities[ind] == 0) {
-      alert("Sorry, this item is sold out!")
+      alert("Sorry, this item is sold out!");
     }
     else if(!Number.isInteger(bquantity)){
-      alert("Prices are in Wei, please only input whole numbers!")
+      alert("Prices are in Wei, please only input whole numbers!");
     }
     else {
     const toPay = costs[ind] * bquantity;
