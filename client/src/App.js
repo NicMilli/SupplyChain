@@ -258,32 +258,32 @@ class App extends Component {
 
         <h2>Add a new product!</h2>
         Cost: <input type="text" className='input-bx' name="cost" value={this.state.cost} onChange={this.handleInputChange} />
-         Product Name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
-         Quantity: <input type="text" className='input-bx' name="quantity" value={this.state.quantity} onChange={this.handleInputChange} />
-        <button type="button" className='create-btn' onClick={this.handleSubmit}>Create new Item</button>
+        &nbsp;Product Name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
+        &nbsp;Quantity: <input type="text" className='input-bx' name="quantity" value={this.state.quantity} onChange={this.handleInputChange} />
+        &nbsp;<button type="button" className='create-btn' onClick={this.handleSubmit}>Create new Item</button>
         <br></br>
 
         <h2>Get an item index!</h2>
         Product name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
-        <button type="button" className='qty-btn' onClick={this.getProdInd}>Get Index</button>
+        &nbsp;<button type="button" className='qty-btn' onClick={this.getProdInd}>Get Index</button>
         <br></br>
 
         <h2>Update Product Quantity!</h2>
         Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
-         New Quantity: <input type="text" className='input-bx' name="uquantity" value={this.state.uquantity} onChange={this.handleInputChange} />
-        <button type="button" className='qty-btn' onClick={()=>this.handleUpdate("qty")}>Update Quantity</button>
+        &nbsp;New Quantity: <input type="text" className='input-bx' name="uquantity" value={this.state.uquantity} onChange={this.handleInputChange} />
+        &nbsp;<button type="button" className='qty-btn' onClick={()=>this.handleUpdate("qty")}>Update Quantity</button>
         <br></br>
 
         <h2>Update Product Name!</h2>
         Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
-         New Name: <input type="text" className='input-bx' name="uname" value={this.state.uname} onChange={this.handleInputChange} />
-        <button type="button" className='qty-btn' onClick={()=>this.handleUpdate("name")}>Update Name</button>
+        &nbsp;New Name: <input type="text" className='input-bx' name="uname" value={this.state.uname} onChange={this.handleInputChange} />
+        &nbsp;<button type="button" className='qty-btn' onClick={()=>this.handleUpdate("name")}>Update Name</button>
         <br></br>
 
         <h2>Update Product Cost!</h2>
         Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
-         New Cost: <input type="text" className='input-bx' name="ucost" value={this.state.ucost} onChange={this.handleInputChange} />
-        <button type="button" className='qty-btn' onClick={()=>this.handleUpdate("cost")}>Update Cost</button>
+        &nbsp;New Cost: <input type="text" className='input-bx' name="ucost" value={this.state.ucost} onChange={this.handleInputChange} />
+        &nbsp;<button type="button" className='qty-btn' onClick={()=>this.handleUpdate("cost")}>Update Cost</button>
         <br></br>
         </div>
 
