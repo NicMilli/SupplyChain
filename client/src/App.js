@@ -199,14 +199,12 @@ class App extends Component {
           <tbody className="has-text-black-bis">
             {this.state.indices.map((a) => (
               <tr className="rows">
-                <When condition={this.state.quantities[a] !=0}>
                 <td ><strong>{this.state.itemNames[a]}</strong></td>
                 <td ><strong>{this.state.costs[a]}</strong></td>
                 <td ><strong>{this.state.quantities[a]}</strong></td>
                 <td >
                   <button type="button" className='create-btn' onClick={()=>this.buyItem(a)}>Buy!</button>
                 </td>
-                </When>
               </tr>
             ))}
           </tbody>
