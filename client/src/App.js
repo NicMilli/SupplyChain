@@ -109,7 +109,7 @@ class App extends Component {
     if(!update){
       alert("Update unsuccessful, are you the owner?")
     }
-    names[index] = uquantity;
+    names[index] = uname;
     this.setState({ItemNames: names})
     alert("You updated the name of "+oldName+" to "+this.state.itemNames[index]);
   }
@@ -163,7 +163,7 @@ class App extends Component {
   getProdInd = () => {
     const { itemName, itemNames } = this.state;
     if(itemName in itemNames){
-    for (i=0; i<=itemNames.length; i++){
+    for (let i=0; i<=itemNames.length; i++){
       if (itemNames[i] == itemName){
         alert("The index of "+itemName+" is "+i);
       }
