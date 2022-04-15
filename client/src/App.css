@@ -86,6 +86,7 @@ tr{
 }
 
 .center {
+  justify-content: center;
   text-align: center;
 }
 
