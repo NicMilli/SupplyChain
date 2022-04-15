@@ -229,7 +229,8 @@ class App extends Component {
         </div>
 
         <footer className='App-footer'>Modified by N.Milligan <br></br>
-        For Udemy Ethereum Blockchain Developer Bootcamp with Solidity</footer>
+        For Udemy Ethereum Blockchain Developer Bootcamp with Solidity <br></br>
+        <a href="https://github.com/NicMilli/SupplyChain">View the source-code on GitHub!</a></footer>
       </div>
     );
   }
