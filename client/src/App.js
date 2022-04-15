@@ -77,7 +77,7 @@ class App extends Component {
     if (itemName in this.state.itemNames) {
       alert("This name already exists, please choose a unique name or update the existing product!")
     }
-    else if(Number.isInteger(cost)){
+    else if(Number.isInteger(cost) == false){
       alert("Prices are in Wei, please only input whole numbers!")
     }
     else {
