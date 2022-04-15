@@ -186,7 +186,7 @@ class App extends Component {
         
         <br></br>
         <div >
-        <table className="centered" style={{border:'solid',}}>
+        <table className="center" style={{border:'solid',}}>
           <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
               <th >Product Name:</th>
