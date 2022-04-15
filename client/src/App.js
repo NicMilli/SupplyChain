@@ -77,6 +77,9 @@ class App extends Component {
     if (itemName in this.state.itemNames) {
       alert("This name already exists, please choose a unique name or update the existing product!")
     }
+    else if(!Number.isInteger(cost)){
+      alert("Prices are in Wei, please only input whole numbers!")
+    }
     else {
     let result = await this.ItemManager.methods.createItem(itemName, cost, quantity).send({ from: this.accounts[0] });
     const index = result.events.ProductStep.returnValues._productIndex;
@@ -116,15 +119,21 @@ class App extends Component {
 
   else{
     const { index, ucost } = this.state;
+    if(!Number.isInteger(ucost)){
+      alert("Prices are in Wei, please only input whole numbers!")
+    }
+    else{
     const update = await this.ItemManager.methods.updateCost(ucost, index).send({ from: this.accounts[0] });
     if(!update){
       alert("Update unsuccessful, are you the owner?")
     }
+    else{
     prices[index] = ucost;
     this.setState({costs: prices})
     alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.costs[index]);
-  }
-  }
+  }}
+}
+  
 
   handleInputChange = (event) => {
     const target = event.target;
@@ -147,12 +156,16 @@ class App extends Component {
   }
 
   buyItem =async(ind) => {
-    const { costs, address } = this.state;
+    const { costs, address, bquantity } = this.state;
     if (this.state.quantities[ind] == 0) {
       alert("Sorry, this item is sold out!")
     }
+    else if(!Number.isInteger(bquantity)){
+      alert("Prices are in Wei, please only input whole numbers!")
+    }
     else {
-    let success = await this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: costs[ind]});
+    const toPay = costs[ind] * bquantity;
+    let success = await this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: toPay});
     if (!success) {alert("Payment unsuccesful")}
     let data =  await this.ItemManager.methods.productData(ind).call({ from: this.accounts[0] });
     amounts[ind] = data[2];
