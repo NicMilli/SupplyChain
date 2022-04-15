@@ -89,12 +89,9 @@ tr{
   background-color: #a25010;
 }
 
-.center {
+.center-table {
   align-self:center;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  text-align: center;
+  margin:auto;
 }
 
 #updates {

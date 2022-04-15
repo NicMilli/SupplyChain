@@ -225,8 +225,8 @@ class App extends Component {
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
         
         <br></br>
-        <div className="center">
-        <table className="center" style={{border:'solid',}}>
+        <div >
+        <table className="center-table" style={{border:'solid',}}>
           <thead className="has-text-black-bis" style={{backgroundColor:"#e6be8a"}}>
             <tr>
               <th >Product Name:</th>
