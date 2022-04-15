@@ -30,7 +30,7 @@ contract ProductSale {
         require(quantity >= numberPaid, "Sorry, there is not enough stock to fulfill this order");
         quantity -= numberPaid;
          
-        (bool success, ) = address(parentContract).call{value:msg.value}(abi.encodeWithSignature("triggerPayment(uint256, uint256, address)", index, numberPaid, msg.sender));
+        (bool success, ) = address(parentContract).call{value:msg.value}(abi.encodeWithSignature("triggerPayment(uint256,uint256,address)", index, numberPaid, msg.sender));
         require(success, "Payment processing failed, please contact the owner");
     }
 
