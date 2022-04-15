@@ -99,10 +99,12 @@ class App extends Component {
     if(!update){
       alert("Update unsuccessful, are you the owner?")
     }
+    else {
     amounts[index] = uquantity;
     this.setState({quantities: amounts})
     console.log(this.state.quantities)
     alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.quantities[index]);
+    }
   }
 
   else if(input=="name"){
@@ -112,12 +114,14 @@ class App extends Component {
     if(!update){
       alert("Update unsuccessful, are you the owner?")
     }
+    else {
     names[index] = uname;
     this.setState({ItemNames: names})
     alert("You updated the name of "+oldName+" to "+this.state.itemNames[index]);
-  }}
+    }
+  }
 
-  else{
+  else {
     const { index, ucost } = this.state;
     if(!Number.isInteger(ucost)){
       alert("Prices are in Wei, please only input whole numbers!");
@@ -132,6 +136,7 @@ class App extends Component {
     this.setState({costs: prices});
     alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.costs[index]);
   }}
+}
 }
   
 
@@ -180,7 +185,8 @@ class App extends Component {
       if (itemNames[i] == itemName){
         alert("The index of "+itemName+" is "+i);
       }
-    }}
+    }
+  }
     else {
     alert("The item name was not found")
     }
@@ -259,7 +265,7 @@ class App extends Component {
 
         <h2>Get an item index!</h2>
         Product name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
-        <button type="button" className='qty-btn' onClick={this.getprodInd}>Update Quantity</button>
+        <button type="button" className='qty-btn' onClick={this.getProdInd}>Update Quantity</button>
         <br></br>
 
         <h2>Update Product Quantity!</h2>
