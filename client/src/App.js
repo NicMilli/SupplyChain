@@ -259,7 +259,7 @@ class App extends Component {
         <div id="updates">
 
         <h2>Add a new product!</h2>
-        Cost: <input type="text" className='input-bx' name="cost" value={this.state.cost} onChange={this.handleInputChange} />
+        Cost: <input type="number" className='input-bx' name="cost" value={this.state.cost} onChange={this.handleInputChange} />
         &nbsp;Product Name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
         &nbsp;Quantity: <input type="text" className='input-bx' name="quantity" value={this.state.quantity} onChange={this.handleInputChange} />
         &nbsp;<button type="button" className='create-btn' onClick={this.handleSubmit}>Create new Item</button>
