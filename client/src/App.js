@@ -75,8 +75,8 @@ class App extends Component {
   }
 
   handleSubmit = async () => {
-    const { cost, itemName, quantity } = this.state;
-    if (itemName in this.state.itemNames) {
+    const { cost, itemName, quantity, itemNames } = this.state;
+    if (itemNames.includes(itemName)) {
       alert("This name already exists, please choose a unique name or update the existing product!")
     }
     else if(!Number.isInteger(Number(cost))){
@@ -87,9 +87,7 @@ class App extends Component {
     const index = result.events.ProductStep.returnValues._productIndex;
     names[index] = itemName; prices[index] = cost; amounts[index] = quantity; indices[index] = index; address[index] = result.events.ProductStep.returnValues._address;
     
-    // productMap.set(index, {itemName: itemName, cost: cost, quantity: quantity});
     this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address:address})
-    
     alert("Send "+cost+" Wei to "+result.events.ProductStep.returnValues._address);
     }
   };
@@ -154,9 +152,9 @@ class App extends Component {
   listenToPaymentEvent = () => {
     let self = this;
     this.ItemManager.events.ItemStep().on("data", async function(evt) {
-      if(evt.returnValues._itemStep === 0) {
-        let item = await self.ItemManager.methods.items(evt.returnValues._itemIndex).call();
-        alert("Item " + item._identifier + " was paid by " + item._buyerAddress+ " , deliver it now!");
+      if(evt.returnValues._itemSteps === 1) {
+        let item = await self.ItemManager.methods.productData(evt.returnValues._productIndex).call();
+        alert("Item " + item[0] + " was paid by " + item[3]+ " , deliver it now!");
       };
     });
   }

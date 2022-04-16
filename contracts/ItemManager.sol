@@ -57,7 +57,7 @@ contract ItemManager is Ownable {
     function triggerPayment(uint _Ind, uint qty, address buyer) public payable {
         ProductSale product = products[_Ind]._product;
         require(address(product) == msg.sender, "Only items are allowed to update themselves");
-        ////require(products[_Ind]._quantity >= qty, "The quantity you have ordered exceeds the available quantity");
+        require(products[_Ind]._quantity >= qty, "The quantity you have ordered exceeds the available quantity");
         paymentAuth[buyer]._transaction[paymentAuth[buyer]._buyerIndex]._itemStep = ItemSteps.Paid;
         products[_Ind]._quantity -= qty;
         paymentAuth[buyer]._transaction[paymentAuth[buyer]._buyerIndex]._quantity = qty;
