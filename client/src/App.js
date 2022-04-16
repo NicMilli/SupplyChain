@@ -65,8 +65,9 @@ class App extends Component {
        amounts[i] = data[2];
        indices[i] = i;
        address[i] = data[3];
+       inputs[i] = 0;
     }
-       this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address: address})
+       this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address: address, inputs: inputs})
   
       //  productMap.set(i, {itemName: data[0], cost: data[1], quantity: data[2]});
       //setValues([...i, {itemName: data[0], cost: data[1], quantity: data[2] }]);
@@ -75,11 +76,10 @@ class App extends Component {
 
   handleSubmit = async () => {
     const { cost, itemName, quantity } = this.state;
-    const integer = Number.isInteger(Number(cost));
     if (itemName in this.state.itemNames) {
       alert("This name already exists, please choose a unique name or update the existing product!")
     }
-    else if(!integer){
+    else if(!Number.isInteger(Number(cost))){
       alert("Prices are in Wei, please only input whole numbers!")
     }
     else {
