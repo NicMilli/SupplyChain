@@ -201,30 +201,17 @@ class App extends Component {
     else {
         x.style.display = 'none';
        }
-  }
+  } 
 
-  renderTable = () => {
-    const {itemNames, costs, quantities, indices, show} = this.state;
+  render() {
+
+    const {quantities, indices, show} = this.state;
+    const newIndices = indices;
     for(let i = 0; i<indices.length; i++) {
       if (quantities[i] == 0 || !show[i]) {
-        indices.splice(i,1);
+        newIndices.splice(i,1);
       }
     }
-
-    return(
-    indices.map((a) => (
-    <tr className="rows">
-      <td ><strong>{itemNames[a]}</strong></td>
-      <td ><strong>{costs[a]} Wei</strong></td>
-      <td ><strong>{quantities[a]}</strong></td>
-      <td >
-        Qty: <input type="text" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={this.handleInputChange} />
-        <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
-      </td>
-    </tr>
-  )))}
-  
-  render() {
     
     if (!this.state.loaded) {
       return <div className="App">Loading Web3, accounts, and contract...<br></br>
@@ -258,7 +245,17 @@ class App extends Component {
             </tr>
           </thead>
           <tbody className="has-text-black-bis">
-            {this.renderTable}
+              {indices.map((a) => (
+                <tr className="rows">
+                  <td ><strong>{itemNames[a]}</strong></td>
+                  <td ><strong>{costs[a]} Wei</strong></td>
+                  <td ><strong>{quantities[a]}</strong></td>
+                  <td >
+                    Qty: <input type="text" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={this.handleInputChange} />
+                    <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table> 
         </div>
