@@ -95,49 +95,55 @@ class App extends Component {
   };
 
   handleUpdate = async (input) => {
-    if(input=="qty"){
-    const { index, uquantity } = this.state;
-    const update = await this.ItemManager.methods.updateQuantity(uquantity, index).send({ from: this.accounts[0] });
-    if(!update){
-      alert("Update unsuccessful, are you the owner?")
-    }
-    else {
-    amounts[index] = uquantity;
-    this.setState({quantities: amounts})
-    alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.quantities[index]);
-    }
-  }
+    const {index} = this.state;
 
-  else if(input=="name"){
-    const { index, uname } = this.state;
-    const oldName = this.state.itemNames[index];
-    const update = await this.ItemManager.methods.updateName(uname, index).send({ from: this.accounts[0] });
-    if(!update){
-      alert("Update unsuccessful, are you the owner?")
-    }
-    else {
-    names[index] = uname;
-    this.setState({ItemNames: names})
-    alert("You updated the name of "+oldName+" to "+this.state.itemNames[index]);
-    }
-  }
+    if (this.state.indices.includes(index)){
+        if(input=="qty"){
+        const { index, uquantity } = this.state;
+        const update = await this.ItemManager.methods.updateQuantity(uquantity, index).send({ from: this.accounts[0] });
+        if(!update){
+          alert("Update unsuccessful, are you the owner?")
+        }
+        else {
+        amounts[index] = uquantity;
+        this.setState({quantities: amounts})
+        alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.quantities[index]);
+        }
+      }
 
-  else {
-    const { index, ucost } = this.state;
-    if(!Number.isInteger(Number(ucost))){
-      alert("Prices are in Wei, please only input whole numbers!");
-    }
-    else{
-    const update = await this.ItemManager.methods.updateCost(ucost, index).send({ from: this.accounts[0] });
-    if(!update){
-      alert("Update unsuccessful, are you the owner?");
-    }
-    else{
-    prices[index] = ucost;
-    this.setState({costs: prices});
-    alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.costs[index]);
-  }}
-}
+      else if(input=="name"){
+        const { index, uname } = this.state;
+        const oldName = this.state.itemNames[index];
+        const update = await this.ItemManager.methods.updateName(uname, index).send({ from: this.accounts[0] });
+        if(!update){
+          alert("Update unsuccessful, are you the owner?")
+        }
+        else {
+        names[index] = uname;
+        this.setState({ItemNames: names})
+        alert("You updated the name of "+oldName+" to "+this.state.itemNames[index]);
+        }
+      }
+
+      else {
+        const { index, ucost } = this.state;
+        if(!Number.isInteger(Number(ucost))){
+          alert("Prices are in Wei, please only input whole numbers!");
+        }
+        else{
+        const update = await this.ItemManager.methods.updateCost(ucost, index).send({ from: this.accounts[0] });
+        if(!update){
+          alert("Update unsuccessful, are you the owner?");
+        }
+        else{
+        prices[index] = ucost;
+        this.setState({costs: prices});
+        alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.costs[index]);
+      }}
+      }}
+
+      else{ alert("The index you have chosen does not exist yet!")}
+
 }
   
 
