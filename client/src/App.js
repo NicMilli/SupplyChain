@@ -72,10 +72,7 @@ class App extends Component {
     }
        this.setState({indices: indices})
        console.log(indices)
-  
-      //  productMap.set(i, {itemName: data[0], cost: data[1], quantity: data[2]});
-      //setValues([...i, {itemName: data[0], cost: data[1], quantity: data[2] }]);
-    
+       console.log(indices[0].costs)
   }
 
   handleSubmit = async () => {
