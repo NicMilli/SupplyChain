@@ -75,7 +75,7 @@ class App extends Component {
   handleSubmit = async () => {
     const { cost, itemName, quantity } = this.state;
     console.log(typeof(cost))
-    const integer = Number.isInteger(cost);
+    const integer = Number.isInteger(Number(cost));
     if (itemName in this.state.itemNames) {
       alert("This name already exists, please choose a unique name or update the existing product!")
     }
@@ -125,7 +125,7 @@ class App extends Component {
 
   else {
     const { index, ucost } = this.state;
-    if(!Number.isInteger(ucost)){
+    if(!Number.isInteger(Number(ucost))){
       alert("Prices are in Wei, please only input whole numbers!");
     }
     else{
@@ -167,7 +167,7 @@ class App extends Component {
     if (this.state.quantities[ind] == 0) {
       alert("Sorry, this item is sold out!");
     }
-    else if(!Number.isInteger(bquantity)){
+    else if(!Number.isInteger(Number(bquantity))){
       alert("Prices are in Wei, please only input whole numbers!");
     }
     else {
@@ -259,7 +259,7 @@ class App extends Component {
         <div id="updates">
 
         <h2>Add a new product!</h2>
-        Cost: <input type="number" className='input-bx' name="cost" value={this.state.cost} onChange={this.handleInputChange} />
+        Cost: <input type="text" className='input-bx' name="cost" value={this.state.cost} onChange={this.handleInputChange} />
         &nbsp;Product Name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
         &nbsp;Quantity: <input type="text" className='input-bx' name="quantity" value={this.state.quantity} onChange={this.handleInputChange} />
         &nbsp;<button type="button" className='create-btn' onClick={this.handleSubmit}>Create new Item</button>
