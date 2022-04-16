@@ -15,11 +15,12 @@ const prices = [];
 const amounts = [];
 const indices = [];
 const address = [];
+const inputs = [];
 
 class App extends Component {
-  state = { loaded: false, cost: 0, itemName: "exampleItem1", 
-  quantity: 0, index: 0, uquantity: 0, bquantity: 0, uname: "New Name", ucost: 0,
-  itemNames: [], costs:[], quantities:[], indices:[], address:[]};
+  state = { loaded: false, cost: 0, itemName: "Example Item", 
+  quantity: 0, index: 0, uquantity: 0, itemName_ind: "Example Item", uname: "New Name", ucost: 0,
+  itemNames: [], costs:[], quantities:[], indices:[], address:[], inputs:[]};
 
   componentDidMount = async () => {
     try {
@@ -179,11 +180,11 @@ class App extends Component {
   }
 
   getProdInd = () => {
-    const { itemName, itemNames } = this.state;
-    if(itemNames.includes(itemName)){
+    const { itemName_ind, itemNames } = this.state;
+    if(itemNames.includes(itemName_ind)){
     for (let i=0; i<=itemNames.length; i++){
-      if (itemNames[i] == itemName){
-        alert("The index of "+itemName+" is "+i);
+      if (itemNames[i] == itemName_ind){
+        alert("The index of "+itemName_ind+" is "+i);
       }
     }
   }
@@ -242,8 +243,8 @@ class App extends Component {
                 <td ><strong>{this.state.costs[a]} Wei</strong></td>
                 <td ><strong>{this.state.quantities[a]}</strong></td>
                 <td >
-                  Qty: <input type="text" className='table-input' name="bquantity" value={this.state.bquantity} onChange={this.handleInputChange} />
-                  <button type="button" className='create-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
+                  Qty: <input type="text" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={this.handleInputChange} />
+                  <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
                 </td>
               </tr>
             ))}
@@ -264,7 +265,7 @@ class App extends Component {
         <br></br>
 
         <h2>Get an item index!</h2>
-        Product name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
+        Product name: <input type="text" className='input-bx' name="itemName_ind" value={this.state.itemName} onChange={this.handleInputChange} />
         &nbsp;<button type="button" className='qty-btn' onClick={this.getProdInd}>Get Index</button>
         <br></br>
 

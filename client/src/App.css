@@ -64,6 +64,15 @@ tr{
   margin-left: 2px;
 }
 
+.buy-btn {
+  background-color: #e6be8a;
+  cursor: pointer; 
+  font-size: 15px;
+  border-radius: 44px;
+  border: 2px solid #2e2f33;
+  margin-left: 2px;
+}
+
 .updates-btn {
   background-color: #a32f1b;
   cursor: pointer; 
