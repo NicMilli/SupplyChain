@@ -9,13 +9,15 @@ import extension2 from './extension2.png';
 import mylogo from './mylogo.png';
 import 'bulma/css/bulma.min.css';
 
-//const productMap = new Map();
+const productMap = new Map();
 const names = [];
 const prices = [];
 const amounts = [];
-const indices = [];
+//const indices = [];
 const address = [];
 const inputs = [];
+
+const indices = [{}];
 
 class App extends Component {
   state = { loaded: false, cost: 0, itemName: "Example Item", 
@@ -60,14 +62,16 @@ class App extends Component {
     let result = await this.ItemManager.methods.getIndexCount().call({ from: this.accounts[0] });
     for (let i=0; i<result; i++) {
        let data =  await this.ItemManager.methods.productData(i).call({ from: this.accounts[0] });
-       names[i] = data[0];
-       prices[i] = data[1];
-       amounts[i] = data[2];
-       indices[i] = i;
-       address[i] = data[3];
-       inputs[i] = 0;
+      //  names[i] = data[0];
+      //  prices[i] = data[1];
+      //  amounts[i] = data[2];
+      //  indices[i] = i;
+      //  address[i] = data[3];
+      //  inputs[i] = 0;
+       indices.push([i,{itemNames: data[0], costs: data[1], quantities: data[2], address: data[3]}])
     }
-       this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address: address, inputs: inputs})
+       this.setState({indices: indices})
+       console.log(indices)
   
       //  productMap.set(i, {itemName: data[0], cost: data[1], quantity: data[2]});
       //setValues([...i, {itemName: data[0], cost: data[1], quantity: data[2] }]);
