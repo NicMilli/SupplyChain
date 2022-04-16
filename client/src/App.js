@@ -9,20 +9,19 @@ import extension2 from './extension2.png';
 import mylogo from './mylogo.png';
 import 'bulma/css/bulma.min.css';
 
-
+//const productMap = new Map();
 const names = [];
 const prices = [];
 const amounts = [];
-//const indices = [];
+const indices = [];
 const address = [];
 const inputs = [];
-
-//const indices = [{}];
+const show = [];
 
 class App extends Component {
   state = { loaded: false, cost: 0, itemName: "Example Item", 
   quantity: 0, index: 0, uquantity: 0, itemName_ind: "Example Item", uname: "New Name", ucost: 0,
-  itemNames: [], costs:[], quantities:[], indices:[], address:[], inputs:[]};
+  itemNames: [], costs:[], quantities:[], indices:[], address:[], inputs:[], show:[]};
 
   componentDidMount = async () => {
     try {
@@ -59,36 +58,27 @@ class App extends Component {
   };
 
   getProducts = async () => {
-    const indices = this.state;
     let result = await this.ItemManager.methods.getIndexCount().call({ from: this.accounts[0] });
     for (let i=0; i<result; i++) {
        let data =  await this.ItemManager.methods.productData(i).call({ from: this.accounts[0] });
-      //  names[i] = data[0];
-      //  prices[i] = data[1];
-      //  amounts[i] = data[2];
-      //  indices[i] = i;
-      //  address[i] = data[3];
-      //  inputs[i] = 0;
-       indices[i] = {itemNames: data[0], costs: data[1], quantities: data[2], address: data[3], hide: false};
+       names[i] = data[0];
+       prices[i] = data[1];
+       amounts[i] = data[2];
+       indices[i] = i;
+       address[i] = data[3];
+       inputs[i] = 0;
+       show[i] = true;
     }
-       this.setState({indices: indices})
-       console.log(indices)
-       console.log(indices[0].costs)
-  }
-
-  listNames = () => {
-    const {indices} = this.state;
-    const names = [];
-    indices.map((a) => (
-      names[a] = a.itemNames
-      )) 
-    return names;
+       this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address: address, inputs: inputs, show: show})
+  
+      //  productMap.set(i, {itemName: data[0], cost: data[1], quantity: data[2]});
+      //setValues([...i, {itemName: data[0], cost: data[1], quantity: data[2] }]);
+    
   }
 
   handleSubmit = async () => {
-    const { cost, itemName, quantity, indices} = this.state;
-      const namesList = this.listNames();
-    if (namesList.includes(itemName)) {
+    const { cost, itemName, quantity, itemNames } = this.state;
+    if (itemNames.includes(itemName)) {
       alert("This name already exists, please choose a unique name or update the existing product!")
     }
     else if(!Number.isInteger(Number(cost))){
@@ -97,47 +87,43 @@ class App extends Component {
     else {
     let result = await this.ItemManager.methods.createItem(itemName, cost, quantity).send({ from: this.accounts[0] });
     const index = result.events.ProductStep.returnValues._productIndex;
-    indices[index] = {itemNames: itemName, costs: cost, quantities: quantity, address: result.events.ProductStep.returnValues._address, hide: false}
-    //names[index] = itemName; prices[index] = cost; amounts[index] = quantity; indices[index] = index; address[index] = result.events.ProductStep.returnValues._address;
-    this.setState({indices: indices})
-    //this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address:address})
+    names[index] = itemName; prices[index] = cost; amounts[index] = quantity; indices[index] = index; address[index] = result.events.ProductStep.returnValues._address;
+    
+    this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address:address})
     alert("Send "+cost+" Wei to "+result.events.ProductStep.returnValues._address);
     }
   };
 
   handleUpdate = async (input) => {
-    const {index, indices} = this.state;
     if(input=="qty"){
-    const { uquantity } = this.state;
+    const { index, uquantity } = this.state;
     const update = await this.ItemManager.methods.updateQuantity(uquantity, index).send({ from: this.accounts[0] });
     if(!update){
       alert("Update unsuccessful, are you the owner?")
     }
     else {
-    // amounts[index] = uquantity;
-    // this.setState({quantities: amounts})
-    indices[index].quantities = uquantity;
-    this.setState({indices: indices})
-    alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.indices[index].quantities);
+    amounts[index] = uquantity;
+    this.setState({quantities: amounts})
+    alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.quantities[index]);
     }
   }
 
   else if(input=="name"){
-    const { uname } = this.state;
-    const oldName = this.state.indices[index].itemNames;
+    const { index, uname } = this.state;
+    const oldName = this.state.itemNames[index];
     const update = await this.ItemManager.methods.updateName(uname, index).send({ from: this.accounts[0] });
     if(!update){
       alert("Update unsuccessful, are you the owner?")
     }
     else {
-    indices[index].itemNames = uname;
-    this.setState({indices: indices})
-    alert("You updated the name of "+oldName+" to "+this.state.indices[index].itemNames);
+    names[index] = uname;
+    this.setState({ItemNames: names})
+    alert("You updated the name of "+oldName+" to "+this.state.itemNames[index]);
     }
   }
 
   else {
-    const { ucost } = this.state;
+    const { index, ucost } = this.state;
     if(!Number.isInteger(Number(ucost))){
       alert("Prices are in Wei, please only input whole numbers!");
     }
@@ -147,11 +133,9 @@ class App extends Component {
       alert("Update unsuccessful, are you the owner?");
     }
     else{
-    indices[index].costs = ucost;
-    this.setState({indices: indices});
-    //prices[index] = ucost;
-    //this.setState({costs: prices});
-    alert("You updated the available quantity of "+this.state.indices[index].itemNames+" to "+this.state.indices[index].costs);
+    prices[index] = ucost;
+    this.setState({costs: prices});
+    alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.costs[index]);
   }}
 }
 }
@@ -178,29 +162,28 @@ class App extends Component {
   }
 
   buyItem =async(ind) => {
-    const { indices, inputs } = this.state;
-    if (indices[ind].quantities == 0) {
+    const { costs, address, inputs } = this.state;
+    if (this.state.quantities[ind] == 0) {
       alert("Sorry, this item is sold out!");
     }
     else if(!Number.isInteger(Number(inputs[ind]))){
-      alert("Only whole items can be bought, please input a whole number!");
+      alert("Sorry, quantities have to be whole numbers");
     }
     else {
-    const toPay = indices[ind].costs * inputs[ind];
-    let success = await this.web3.eth.sendTransaction({to: indices[ind].address, from:this.accounts[0], value: toPay});
+    const toPay = costs[ind] * inputs[ind];
+    let success = await this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: toPay});
     if (!success) {alert("Payment unsuccesful")}
     let data =  await this.ItemManager.methods.productData(ind).call({ from: this.accounts[0] });
-    indices[ind].quantities = data[2];
-    this.setState({indices: indices});
+    amounts[ind] = data[2];
+    this.setState({quantities: amounts});
     }
   }
 
   getProdInd = () => {
-    const { itemName_ind, indices } = this.state;
-    const namesList = this.listNames();
-    if(namesList.includes(itemName_ind)){
-    for (let i=0; i<=namesList.length; i++){
-      if (namesList[i] == itemName_ind){
+    const { itemName_ind, itemNames } = this.state;
+    if(itemNames.includes(itemName_ind)){
+    for (let i=0; i<=itemNames.length; i++){
+      if (itemNames[i] == itemName_ind){
         alert("The index of "+itemName_ind+" is "+i);
       }
     }
@@ -219,6 +202,26 @@ class App extends Component {
         x.style.display = 'none';
        }
   }
+
+  renderTable = () => {
+    const {itemNames, costs, quantities, indices, show} = this.state;
+    for(let i = 0; i<indices.length; i++) {
+      if (quantities[i] == 0 || !show[i]) {
+        indices.splice(i,1);
+      }
+    }
+
+    indices.map((a) => (
+    <tr className="rows">
+      <td ><strong>{itemNames[a]}</strong></td>
+      <td ><strong>{costs[a]} Wei</strong></td>
+      <td ><strong>{quantities[a]}</strong></td>
+      <td >
+        Qty: <input type="text" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={this.handleInputChange} />
+        <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
+      </td>
+    </tr>
+  ))}
   
   render() {
     
@@ -254,17 +257,7 @@ class App extends Component {
             </tr>
           </thead>
           <tbody className="has-text-black-bis">
-            {this.state.indices.filter((a) => a.quantities !== 0).map((a) => (
-              <tr className="rows">
-                <td ><strong>{a.itemNames}</strong></td>
-                <td ><strong>{a.costs} Wei</strong></td>
-                <td ><strong>{a.quantities}</strong></td>
-                <td >
-                  Qty: <input type="text" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={this.handleInputChange} />
-                  <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
-                </td>
-              </tr>
-            ))}
+            {this.renderTable}
           </tbody>
         </table> 
         </div>
