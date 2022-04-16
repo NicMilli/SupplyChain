@@ -247,9 +247,9 @@ class App extends Component {
           <tbody className="has-text-black-bis">
               {indices.map((a) => (
                 <tr className="rows">
-                  <td ><strong>{itemNames[a]}</strong></td>
-                  <td ><strong>{costs[a]} Wei</strong></td>
-                  <td ><strong>{quantities[a]}</strong></td>
+                  <td ><strong>{this.state.itemNames[a]}</strong></td>
+                  <td ><strong>{this.state.costs[a]} Wei</strong></td>
+                  <td ><strong>{this.state.quantities[a]}</strong></td>
                   <td >
                     Qty: <input type="text" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={this.handleInputChange} />
                     <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
