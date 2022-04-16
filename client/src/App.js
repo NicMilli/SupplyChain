@@ -235,7 +235,7 @@ class App extends Component {
             </tr>
           </thead>
           <tbody className="has-text-black-bis">
-            {this.state.indices.map((a) => (
+            {this.state.indices.filter((a) => this.state.quantities[a] !== 0).map((a) => (
               <tr className="rows">
                 <td ><strong>{this.state.itemNames[a]}</strong></td>
                 <td ><strong>{this.state.costs[a]} Wei</strong></td>
