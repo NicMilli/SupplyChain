@@ -263,7 +263,7 @@ class App extends Component {
         <br></br>
 
         <h2>Get an item index!</h2>
-        Product name: <input type="text" className='input-bx' name="itemName_ind" value={this.state.itemName} onChange={this.handleInputChange} />
+        Product name: <input type="text" className='input-bx' name="itemName_ind" value={this.state.itemName_ind} onChange={this.handleInputChange} />
         &nbsp;<button type="button" className='qty-btn' onClick={this.getProdInd}>Get Index</button>
         <br></br>
 
