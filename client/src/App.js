@@ -211,6 +211,7 @@ class App extends Component {
       }
     }
 
+    return(
     indices.map((a) => (
     <tr className="rows">
       <td ><strong>{itemNames[a]}</strong></td>
@@ -221,7 +222,7 @@ class App extends Component {
         <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
       </td>
     </tr>
-  ))}
+  )))}
   
   render() {
     
