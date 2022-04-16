@@ -74,7 +74,6 @@ class App extends Component {
 
   handleSubmit = async () => {
     const { cost, itemName, quantity } = this.state;
-    console.log(typeof(cost))
     const integer = Number.isInteger(Number(cost));
     if (itemName in this.state.itemNames) {
       alert("This name already exists, please choose a unique name or update the existing product!")
@@ -104,7 +103,6 @@ class App extends Component {
     else {
     amounts[index] = uquantity;
     this.setState({quantities: amounts})
-    console.log(this.state.quantities)
     alert("You updated the available quantity of "+this.state.itemNames[index]+" to "+this.state.quantities[index]);
     }
   }
@@ -244,7 +242,7 @@ class App extends Component {
                 <td ><strong>{this.state.costs[a]} Wei</strong></td>
                 <td ><strong>{this.state.quantities[a]}</strong></td>
                 <td >
-                  Qty: <input type="text" className='table-input' name="qty" value={this.state.bquantity} onChange={this.handleInputChange} />
+                  Qty: <input type="text" className='table-input' name="bquantity" value={this.state.bquantity} onChange={this.handleInputChange} />
                   <button type="button" className='create-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
                 </td>
               </tr>
