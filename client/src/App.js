@@ -68,7 +68,7 @@ class App extends Component {
       //  indices[i] = i;
       //  address[i] = data[3];
       //  inputs[i] = 0;
-       indices[i].push({itemNames: data[0], costs: data[1], quantities: data[2], address: data[3]});
+       indices[i] = {itemNames: data[0], costs: data[1], quantities: data[2], address: data[3]};
     }
        this.setState({indices: indices})
        console.log(indices)
