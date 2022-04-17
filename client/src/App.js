@@ -177,6 +177,7 @@ class App extends Component {
     }
     else {
     const toPay = costs[ind] * inputs[ind];
+    alert(toPay+ " IS THE AMOUNTS PAID")
     let success = await this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: toPay});
     if (!success) {alert("Payment unsuccesful")}
     let data =  await this.ItemManager.methods.productData(ind).call({ from: this.accounts[0] });
