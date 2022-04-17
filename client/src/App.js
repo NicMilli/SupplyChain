@@ -169,6 +169,8 @@ class App extends Component {
 
   buyItem =async(ind) => {
     const { costs, address, inputs } = this.state;
+    console.log(this.state.quantities[ind])
+    console.log(inputs[ind])
     if (this.state.quantities[ind] <= inputs[ind]) {
       alert("Sorry, there is not enough stock to fulfill this order!");
     }
@@ -218,6 +220,7 @@ class App extends Component {
         newIndices.splice(i,1);
       }
     }
+    console.log(newIndices)
     
     if (!this.state.loaded) {
       return <div className="App">Loading Web3, accounts, and contract...<br></br>
