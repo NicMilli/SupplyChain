@@ -54,14 +54,14 @@ contract ItemManager is Ownable {
         return(true);
     }
 
-    function triggerPayment(uint _Ind, uint qty, address buyer) public payable {
+    function triggerPayment(uint _Ind, uint _qty, address buyer) public payable {
         ProductSale product = products[_Ind]._product;
         require(address(product) == msg.sender, "Only items are allowed to update themselves");
-        //require(products[_Ind]._quantity >= qty, "The quantity you have ordered exceeds the available quantity");
+        require(products[_Ind]._quantity >= _qty, "The quantity you have ordered exceeds the available quantity");
         paymentAuth[buyer]._transaction[paymentAuth[buyer]._buyerIndex]._itemStep = ItemSteps.Paid;
-        products[_Ind]._quantity -= qty;
-        paymentAuth[buyer]._transaction[paymentAuth[buyer]._buyerIndex]._quantity = qty;
-        emit ItemStep(_Ind, buyer, paymentAuth[buyer]._buyerIndex, qty, uint( paymentAuth[buyer]._transaction[paymentAuth[buyer]._buyerIndex]._itemStep)); //removed: uint(items[_index]._step)
+        products[_Ind]._quantity -= _qty;
+        paymentAuth[buyer]._transaction[paymentAuth[buyer]._buyerIndex]._quantity = _qty;
+        emit ItemStep(_Ind, buyer, paymentAuth[buyer]._buyerIndex, _qty, uint( paymentAuth[buyer]._transaction[paymentAuth[buyer]._buyerIndex]._itemStep)); //removed: uint(items[_index]._step)
         emit ProductStep(_Ind, address(product),uint(products[_Ind]._quantity));
         paymentAuth[buyer]._buyerIndex++;
     }

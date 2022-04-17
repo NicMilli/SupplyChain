@@ -169,16 +169,15 @@ class App extends Component {
 
   buyItem =async(ind) => {
     const { costs, address, inputs } = this.state;
-    if (this.state.quantities[ind] == 0) {
-      alert("Sorry, this item is sold out!");
+    if (this.state.quantities[ind] < inputs[ind]) {
+      alert("Sorry, there is not enough stock to fulfill this order!");
     }
     else if(!Number.isInteger(Number(inputs[ind]))){
       alert("Sorry, quantities have to be whole numbers");
     }
     else {
     const toPay = costs[ind] * inputs[ind];
-    alert(toPay+ " IS THE AMOUNTS PAID")
-    let success = await this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: toPay});
+    let success = await this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: Number(toPay)});
     if (!success) {alert("Payment unsuccesful")}
     let data =  await this.ItemManager.methods.productData(ind).call({ from: this.accounts[0] });
     amounts[ind] = data[2];
