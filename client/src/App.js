@@ -171,7 +171,7 @@ class App extends Component {
     const { costs, address, inputs } = this.state;
     console.log(this.state.quantities[ind])
     console.log(inputs[ind])
-    if (this.state.quantities[ind] <= inputs[ind]) {
+    if (this.state.quantities[ind] < inputs[ind]) {
       alert("Sorry, there is not enough stock to fulfill this order!");
     }
     else if(!Number.isInteger(Number(inputs[ind]))){
