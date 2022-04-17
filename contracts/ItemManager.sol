@@ -75,7 +75,7 @@ contract ItemManager is Ownable {
 
     function updateQuantity(uint newQuantity, uint itemIndex) public onlyOwner returns(bool) {
         products[itemIndex]._quantity = newQuantity;
-        (bool success, ) = address(products[itemIndex]._product).call(abi.encodeWithSignature("updateQty(uint256)", newQuantity));
+        (bool success, ) = address(products[itemIndex]._product).call(abi.encodeWithSignature("update_Qty(uint256)",newQuantity));
         require(success, "Product quantity update failed, please try again");
         return(success);
     }
@@ -87,7 +87,7 @@ contract ItemManager is Ownable {
 
     function updateCost(uint newCost, uint itemIndex) public onlyOwner returns(bool) {
         products[itemIndex]._priceInWei = newCost;
-        (bool success, ) = address(products[itemIndex]._product).call(abi.encodeWithSignature("update_Cost(uint256)", newCost));
+        (bool success, ) = address(products[itemIndex]._product).call(abi.encodeWithSignature("update_Cost(uint256)",newCost));
         require(success, "Product quantity update failed, please try again");
         return(success);
     }

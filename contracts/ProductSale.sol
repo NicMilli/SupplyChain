@@ -18,7 +18,6 @@ contract ProductSale {
     }
 
     uint numberPaid;
-    //uint qty = _quantity;
     event test(uint num, uint qty, address ctrct);
 
     receive() external payable {

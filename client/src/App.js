@@ -169,7 +169,7 @@ class App extends Component {
 
   buyItem =async(ind) => {
     const { costs, address, inputs } = this.state;
-    if (this.state.quantities[ind] < inputs[ind]) {
+    if (this.state.quantities[ind] <= inputs[ind]) {
       alert("Sorry, there is not enough stock to fulfill this order!");
     }
     else if(!Number.isInteger(Number(inputs[ind]))){
