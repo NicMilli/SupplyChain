@@ -111,6 +111,7 @@ class App extends Component {
         }
       }
 
+
       else if(input=="name"){
         const { index, uname } = this.state;
         const oldName = this.state.itemNames[index];
@@ -236,7 +237,7 @@ class App extends Component {
     const {quantities, indices, show} = this.state;
     const newIndices = indices;
     for(let i = 0; i<indices.length; i++) {
-      if (quantities[i] == 0 || !show[i]) {
+      if (quantities[i] == 0 || show[i] == false) {
         newIndices.splice(i,1);
       }
     }
