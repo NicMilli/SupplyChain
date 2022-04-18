@@ -97,7 +97,7 @@ class App extends Component {
   handleUpdate = async (input) => {
     const {index, indices} = this.state;
     console.log(indices)
-    if (index <= indices){
+    if (index <= indices.length){
         if(input=="qty"){
         const { index, uquantity } = this.state;
         const update = await this.ItemManager.methods.updateQuantity(uquantity, index).send({ from: this.accounts[0] });
@@ -240,8 +240,6 @@ class App extends Component {
         newIndices.splice(i,1);
       }
     }
-    console.log(newIndices)
-    console.log(this.state.indices)
     
     if (!this.state.loaded) {
       return <div className="App">Loading Web3, accounts, and contract...<br></br>
