@@ -214,7 +214,7 @@ class App extends Component {
     }
   }
 
-  toggleVisibility = () => {
+  toggleVisibility = async() => {
     const {show, index} = this.state;
     let data =  await this.ItemManager.methods.toggleShow(index).send({ from: this.accounts[0] });
      show[index] = data[0];
