@@ -13,6 +13,7 @@ contract ItemManager is Ownable {
         string _identifier;
         uint _priceInWei;
         uint _quantity;
+        bool show;
         //ItemManager.ProductSteps _productStep;
     }
 
@@ -96,8 +97,18 @@ contract ItemManager is Ownable {
         return(index);
     }
 
-    function productData(uint _index) public view returns(string memory, uint, uint, address) {
-        return(products[_index]._identifier, products[_index]._priceInWei, products[_index]._quantity, address(products[_index]._product));
+    function toggleShow (uint _ind) public returns(bool) {
+        if(products[_ind].show == true) {
+           products[_ind].show = false;
+        }
+        else {
+            products[_ind].show = true;
+        }
+        return(products[_ind].show);
+    }
+
+    function productData(uint _index) public view returns(string memory, uint, uint, address, bool) {
+        return(products[_index]._identifier, products[_index]._priceInWei, products[_index]._quantity, address(products[_index]._product), products[_index].show);
     }
 
      fallback () external payable {

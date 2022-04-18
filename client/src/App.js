@@ -67,7 +67,7 @@ class App extends Component {
        indices[i] = i;
        address[i] = data[3];
        inputs[i] = 0;
-       show[i] = true;
+       show[i] = data[4];
     }
        this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address: address, inputs: inputs, show: show})
   
@@ -77,7 +77,7 @@ class App extends Component {
   }
 
   handleSubmit = async () => {
-    const { cost, itemName, quantity, itemNames } = this.state;
+    const { cost, itemName, quantity, itemNames, show } = this.state;
     if (itemNames.includes(itemName)) {
       alert("This name already exists, please choose a unique name or update the existing product!")
     }
@@ -88,16 +88,16 @@ class App extends Component {
     let result = await this.ItemManager.methods.createItem(itemName, cost, quantity).send({ from: this.accounts[0] });
     const index = result.events.ProductStep.returnValues._productIndex;
     names[index] = itemName; prices[index] = cost; amounts[index] = quantity; indices[index] = index; address[index] = result.events.ProductStep.returnValues._address;
-    
-    this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address:address})
+    show[index] = true;
+    this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address:address, show: show})
     alert("Send "+cost+" Wei to "+result.events.ProductStep.returnValues._address);
     }
   };
 
   handleUpdate = async (input) => {
     const {index, indices} = this.state;
-
-    if (indices.includes(index)){
+    console.log(indices)
+    if (index <= indices){
         if(input=="qty"){
         const { index, uquantity } = this.state;
         const update = await this.ItemManager.methods.updateQuantity(uquantity, index).send({ from: this.accounts[0] });
@@ -157,6 +157,19 @@ class App extends Component {
     });
   }
 
+  handleQtyChange = (event) => {
+    const {inputs} = this.state;
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    inputs[name] = value;
+    
+    this.setState({
+      inputs: inputs
+    });
+  }
+
+
   listenToPaymentEvent = () => {
     let self = this;
     this.ItemManager.events.ItemStep().on("data", async function(evt) {
@@ -199,6 +212,13 @@ class App extends Component {
     else {
     alert("The item name was not found")
     }
+  }
+
+  toggleVisibility = () => {
+    const {show, index} = this.state;
+    let data =  await this.ItemManager.methods.toggleShow(index).send({ from: this.accounts[0] });
+     show[index] = data[0];
+     this.setState({show: show});
   }
 
   hideUpdates = () => {
@@ -261,7 +281,7 @@ class App extends Component {
                   <td ><strong>{this.state.costs[a]} Wei</strong></td>
                   <td ><strong>{this.state.quantities[a]}</strong></td>
                   <td >
-                    Qty: <input type="text" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={this.handleInputChange} />
+                    Qty: <input type="number" className='table-input' name={a} value={this.state.inputs[a]} onChange={()=>this.handleQtyChange} />
                     <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
                   </td>
                 </tr>
@@ -275,7 +295,7 @@ class App extends Component {
         <button id="toggle" type="button" className= 'updates-btn' onClick={this.hideUpdates}>Show/Hide owner section</button>
         <div id="updates">
 
-        <h2>Add a new product!</h2>
+        <h1>Add a new product!</h1>
         Cost: <input type="text" className='input-bx' name="cost" value={this.state.cost} onChange={this.handleInputChange} />
         &nbsp;Product Name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
         &nbsp;Quantity: <input type="text" className='input-bx' name="quantity" value={this.state.quantity} onChange={this.handleInputChange} />
@@ -285,6 +305,11 @@ class App extends Component {
         <h2>Get an item index!</h2>
         Product name: <input type="text" className='input-bx' name="itemName_ind" value={this.state.itemName_ind} onChange={this.handleInputChange} />
         &nbsp;<button type="button" className='qty-btn' onClick={this.getProdInd}>Get Index</button>
+        <br></br>
+
+        <h2>Hide an item from the table!</h2>
+        Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
+        &nbsp;<button type="button" className='qty-btn' onClick={this.hideProduct}>Hide this product</button>
         <br></br>
 
         <h2>Update Product Quantity!</h2>
@@ -317,3 +342,4 @@ class App extends Component {
 }
 
 export default App;
+//variables across reloads (show/hide) && inputs for table
