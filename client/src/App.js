@@ -77,7 +77,7 @@ class App extends Component {
   }
 
   handleSubmit = async () => {
-    const { cost, itemName, quantity, itemNames, show } = this.state;
+    const { cost, itemName, quantity, itemNames, show, indices } = this.state;
     if (itemNames.includes(itemName)) {
       alert("This name already exists, please choose a unique name or update the existing product!")
     }
@@ -97,7 +97,7 @@ class App extends Component {
   handleUpdate = async (input) => {
     const {index, indices} = this.state;
     console.log(indices)
-    if (index <= indices.length){
+    if (index < indices.length){
         if(input=="qty"){
         const { index, uquantity } = this.state;
         const update = await this.ItemManager.methods.updateQuantity(uquantity, index).send({ from: this.accounts[0] });
@@ -236,6 +236,7 @@ class App extends Component {
 
     const {quantities, indices, show} = this.state;
     const newIndices = indices;
+    console.log(indices.length)
     for(let i = 0; i<indices.length; i++) {
       if (quantities[i] == 0 || show[i] == false) {
         newIndices.splice(i,1);
@@ -280,7 +281,7 @@ class App extends Component {
                   <td ><strong>{this.state.costs[a]} Wei</strong></td>
                   <td ><strong>{this.state.quantities[a]}</strong></td>
                   <td >
-                    Qty: <input type="number" className='table-input' name={a} value={this.state.inputs[a]} onChange={()=>this.handleQtyChange} />
+                    Qty: <input type="number" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={()=>this.handleInputChange} />
                     <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
                   </td>
                 </tr>
