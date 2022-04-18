@@ -176,8 +176,8 @@ class App extends Component {
     } 
 
     else{
-      itemName_ind = itemNames[index];
-      this.setState({itemName_ind: itemName_ind});
+      const name = itemNames[index];
+      this.setState({itemName_ind: name});
     }
     
     this.setState({
