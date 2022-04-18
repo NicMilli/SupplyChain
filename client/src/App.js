@@ -233,15 +233,6 @@ class App extends Component {
   } 
 
   render() {
-
-    const {quantities, indices, show} = this.state;
-    const newIndices = indices;
-    console.log(indices.length)
-    for(let i = 0; i<indices.length; i++) {
-      if (quantities[i] == 0 || show[i] == false) {
-        newIndices.splice(i,1);
-      }
-    }
     
     if (!this.state.loaded) {
       return <div className="App">Loading Web3, accounts, and contract...<br></br>
