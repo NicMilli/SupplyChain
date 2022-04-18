@@ -158,6 +158,33 @@ class App extends Component {
     });
   }
 
+  handleEditChange = (event) => {
+    const {index, itemNames, itemName_ind} = this.state;
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    if (target.name === "itemName"){
+      if(itemNames.includes(itemName_ind)){
+        for (let i=0; i<=itemNames.length; i++){
+          if (itemNames[i] === itemName_ind){
+            index = i;
+            this.setState({index: index});
+          }
+        }
+      }
+    } 
+
+    else{
+      itemName_ind = itemNames[index];
+      this.setState({itemName_ind: itemName_ind});
+    }
+    
+    this.setState({
+      [name]: value
+    });
+  }
+
   handleQtyChange = (event) => {
     const {inputs} = this.state;
     const target = event.target;
@@ -205,7 +232,7 @@ class App extends Component {
     const { itemName_ind, itemNames } = this.state;
     if(itemNames.includes(itemName_ind)){
     for (let i=0; i<=itemNames.length; i++){
-      if (itemNames[i] == itemName_ind){
+      if (itemNames[i] === itemName_ind){
         alert("The index of "+itemName_ind+" is "+i);
       }
     }
@@ -293,31 +320,28 @@ class App extends Component {
         &nbsp;<button type="button" className='create-btn' onClick={this.handleSubmit}>Create new Item</button>
         <br></br>
 
-        <h2>Get an item index!</h2>
-        Product name: <input type="text" className='input-bx' name="itemName_ind" value={this.state.itemName_ind} onChange={this.handleInputChange} />
+        <h1>Edit Items: Enter Product Index or name</h1>
+        Index: <input type="number" className='input-bx' name="index" value={this.state.index} onChange={this.handleEditChange} />
+        &nbsp;or Product name: <input type="text" className='input-bx' name="itemName_ind" value={this.state.itemName_ind} onChange={this.handleEditChange} />
         &nbsp;<button type="button" className='qty-btn' onClick={this.getProdInd}>Get Index</button>
         <br></br>
 
         <h2>Hide an item from the table!</h2>
-        Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
-        &nbsp;<button type="button" className='qty-btn' onClick={this.hideProduct}>Hide this product</button>
+        <button type="button" className='qty-btn' onClick={this.hideProduct}>Hide/show product</button>
         <br></br>
 
         <h2>Update Product Quantity!</h2>
-        Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
-        &nbsp;New Quantity: <input type="text" className='input-bx' name="uquantity" value={this.state.uquantity} onChange={this.handleInputChange} />
+        New Quantity: <input type="text" className='input-bx' name="uquantity" value={this.state.uquantity} onChange={this.handleInputChange} />
         &nbsp;<button type="button" className='qty-btn' onClick={()=>this.handleUpdate('qty')}>Update Quantity</button>
         <br></br>
 
         <h2>Update Product Name!</h2>
-        Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
-        &nbsp;New Name: <input type="text" className='input-bx' name="uname" value={this.state.uname} onChange={this.handleInputChange} />
+        New Name: <input type="text" className='input-bx' name="uname" value={this.state.uname} onChange={this.handleInputChange} />
         &nbsp;<button type="button" className='qty-btn' onClick={()=>this.handleUpdate("name")}>Update Name</button>
         <br></br>
 
         <h2>Update Product Cost!</h2>
-        Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
-        &nbsp;New Cost: <input type="text" className='input-bx' name="ucost" value={this.state.ucost} onChange={this.handleInputChange} />
+        New Cost: <input type="text" className='input-bx' name="ucost" value={this.state.ucost} onChange={this.handleInputChange} />
         &nbsp;<button type="button" className='qty-btn' onClick={()=>this.handleUpdate("cost")}>Update Cost</button>
         <br></br>
         </div>
