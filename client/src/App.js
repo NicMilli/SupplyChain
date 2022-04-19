@@ -158,6 +158,13 @@ class App extends Component {
     });
   }
 
+  handleTableInput = (ind) => {
+    const {inputs} = this.state;
+
+    inputs[ind] = "value from table input";
+    this.setState({inputs: inputs}) 
+  }
+
   handleDropdownChange = (event) => {
     const { itemName_ind, itemNames } = this.state;
     const target = event.target;
@@ -255,7 +262,19 @@ class App extends Component {
 
   render() {
 
-    const {indices, itemNames} = this.state;
+    const {indices, itemNames, quantities, show} = this.state;
+    const newIndices = [];
+    const j = 0;
+    console.log(newIndices.length)
+    for (i=0; i<newIndices.length; i++){
+      if (quantities[i] === 0){
+        console.log(newIndices.length)
+      }
+      else {
+        newIndices[j] = indices[i];
+        j++;
+      }
+    }
     
     if (!this.state.loaded) {
       return <div className="App">Loading Web3, accounts, and contract...<br></br>
@@ -295,7 +314,7 @@ class App extends Component {
                   <td ><strong>{this.state.costs[a]} Wei</strong></td>
                   <td ><strong>{this.state.quantities[a]}</strong></td>
                   <td >
-                    Qty: <input type="number" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={this.handleInputChange} />
+                    Qty: <input type="number" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={()=>this.handleTableInput(a)} />
                     <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
                   </td>
                 </tr>
@@ -316,6 +335,7 @@ class App extends Component {
         &nbsp;<button type="button" className='create-btn' onClick={this.handleSubmit}>Create new Item</button>
         <br></br>
 
+        <h1>Edit Items: Choose product</h1>
         <select className='input-bx' onChange={this.handleDropdownChange}>
          {itemNames.map(names => {
            return (
@@ -323,11 +343,9 @@ class App extends Component {
            )
          })}
         </select>
-
-        <h1>Edit Items: Enter Product Index or name</h1>
-        Index: <input type="number" className='input-bx' name="index" value={this.state.index} onChange={this.handleEditChange} />
+        {/* Index: <input type="number" className='input-bx' name="index" value={this.state.index} onChange={this.handleEditChange} />
         &nbsp;or Product name: <input type="text" className='input-bx' name="itemName_ind" value={this.state.itemName_ind} onChange={this.handleEditChange} />
-        &nbsp;<button type="button" className='qty-btn' onClick={this.getProdInd}>Get Index</button>
+        &nbsp;<button type="button" className='qty-btn' onClick={this.getProdInd}>Get Index</button> */}
         <br></br>
 
         <h2>Hide an item from the table!</h2>
@@ -337,7 +355,7 @@ class App extends Component {
 
         <h2>Update Product Quantity!</h2>
         Product index: <input type="text" className='input-bx' name="index" value={this.state.index} onChange={this.handleInputChange} />
-        &nbsp;New Quantity: <input type="text" className='input-bx' name="uquantity" value={this.state.uquantity} onChange={this.handleInputChange} />
+        &nbsp;New Quantity: <input type="number" className='input-bx' name="uquantity" value={this.state.uquantity} onChange={this.handleInputChange} />
         &nbsp;<button type="button" className='qty-btn' onClick={()=>this.handleUpdate('qty')}>Update Quantity</button>
         <br></br>
 
