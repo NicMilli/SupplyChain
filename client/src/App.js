@@ -265,7 +265,7 @@ class App extends Component {
     const {indices, itemNames, quantities, show} = this.state;
     const newIndices = [];
     const j = 0;
-    console.log(newIndices.length)
+    console.log(newIndices)
     for (let i=0; i<newIndices.length; i++){
       if (quantities[i] === 0){
         console.log(indices.length)
