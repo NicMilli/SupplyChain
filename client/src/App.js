@@ -260,18 +260,18 @@ class App extends Component {
        }
   } 
 
-  filterIndices = () => {
-    const {indices, quantities} = this.state;
-    const newIndices = [indices, quantities];
-    newIndices.filter(function(ind, qty) { 
-      return qty !== 0
-  });
-    console.log(newIndices)
+  // filterIndices = () => {
+  //   const {indices, quantities} = this.state;
+  //   const newIndices = [indices, quantities];
+  //   newIndices.filter(function(ind, qty) { 
+  //     return qty !== 0
+  // });
+  //   console.log(newIndices)
 
-  }
+  // }
 
   render() {
-    this.filterIndices();
+    // const tableIndex = this.filterIndices();
     const {indices, itemNames} = this.state;
 
     if (!this.state.loaded) {
