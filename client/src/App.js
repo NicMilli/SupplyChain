@@ -268,7 +268,7 @@ class App extends Component {
   }
 
   render() {
-    this.filterIndices;
+    this.filterIndices();
     const {indices, itemNames} = this.state;
 
     if (!this.state.loaded) {
