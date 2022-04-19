@@ -269,7 +269,7 @@ class App extends Component {
 
   render() {
     this.filterIndices;
-    const {indices. itemNames} = this.state;
+    const {indices, itemNames} = this.state;
 
     if (!this.state.loaded) {
       return <div className="App">Loading Web3, accounts, and contract...<br></br>
