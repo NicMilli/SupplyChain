@@ -260,22 +260,16 @@ class App extends Component {
        }
   } 
 
-  render() {
-
-    const {indices, itemNames, quantities, show} = this.state;
-    const newIndices = [];
-    const j = 0;
+  filterIndices = () => {
+    const {indices, quantities} = this.state;
+    const newIndices = [indices, quantities];
     console.log(newIndices)
-    for (let i=0; i<newIndices.length; i++){
-      if (quantities[i] == 0){
-        console.log(indices.length)
-      }
-      else {
-        newIndices[j] = indices[i];
-        j++;
-      }
-    }
-    
+
+  }
+
+  render() {
+    this.filterIndices;
+
     if (!this.state.loaded) {
       return <div className="App">Loading Web3, accounts, and contract...<br></br>
         <h2>In order to buy coins, please install the metamask plugin on chrome or firefox and connect to the Ropsten test network.</h2> <br></br>
