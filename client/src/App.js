@@ -158,6 +158,27 @@ class App extends Component {
     });
   }
 
+  handleInputChange = (event) => {
+    const { itemName_ind, itemNames } = this.state;
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    //const name = target.name;
+
+    if(itemNames.includes(itemName_ind)){
+    for (let i=0; i<itemNames.length; i++){
+      if (itemNames[i] === itemName_ind){
+        const index_i = i;
+        this.setState({index: index_i});
+      }
+    }
+  }
+    else {
+    alert("The item name was not found")
+    }
+    
+    this.setState({itemNames_ind: value});
+  }
+
   handleQtyChange = (event) => {
     const {inputs} = this.state;
     const target = event.target;
