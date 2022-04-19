@@ -89,7 +89,7 @@ class App extends Component {
     const index = result.events.ProductStep.returnValues._productIndex;
     names[index] = itemName; prices[index] = cost; amounts[index] = quantity; indices[index] = index; address_arr[index] = result.events.ProductStep.returnValues._address;
     show_arr[index] = true;
-    this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address:address, show: show})
+    this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address: address_arr, show: show})
     alert("Send "+cost+" Wei to "+result.events.ProductStep.returnValues._address);
     }
   };
@@ -98,7 +98,7 @@ class App extends Component {
     const {index, indices} = this.state;
     console.log(indices)
     if (index < indices.length){
-        if(input=="qty"){
+        if(input === "qty"){
         const { index, uquantity } = this.state;
         const update = await this.ItemManager.methods.updateQuantity(uquantity, index).send({ from: this.accounts[0] });
         if(!update){
@@ -112,7 +112,7 @@ class App extends Component {
       }
 
 
-      else if(input=="name"){
+      else if(input === "name"){
         const { index, uname } = this.state;
         const oldName = this.state.itemNames[index];
         const update = await this.ItemManager.methods.updateName(uname, index).send({ from: this.accounts[0] });
@@ -205,7 +205,7 @@ class App extends Component {
     const { itemName_ind, itemNames } = this.state;
     if(itemNames.includes(itemName_ind)){
     for (let i=0; i<=itemNames.length; i++){
-      if (itemNames[i] == itemName_ind){
+      if (itemNames[i] === itemName_ind){
         alert("The index of "+itemName_ind+" is "+i);
       }
     }
