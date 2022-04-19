@@ -158,15 +158,15 @@ class App extends Component {
     });
   }
 
-  handleInputChange = (event) => {
+  handleDropdownChange = (event) => {
     const { itemName_ind, itemNames } = this.state;
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     //const name = target.name;
 
-    if(itemNames.includes(itemName_ind)){
+    if(itemNames.includes(value)){
     for (let i=0; i<itemNames.length; i++){
-      if (itemNames[i] === itemName_ind){
+      if (itemNames[i] === value){
         const index_i = i;
         this.setState({index: index_i});
       }
@@ -316,7 +316,7 @@ class App extends Component {
         &nbsp;<button type="button" className='create-btn' onClick={this.handleSubmit}>Create new Item</button>
         <br></br>
 
-        <select onChange={this.handleInputChange}>
+        <select className='input-bx' onChange={this.handleDropdownChange}>
          {itemNames.map(names => {
            return (
              <option value={names}> {names} </option>
