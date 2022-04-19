@@ -13,10 +13,10 @@ import 'bulma/css/bulma.min.css';
 const names = [];
 const prices = [];
 const amounts = [];
-const indices = [];
-const address = [];
-const inputs = [];
-const show = [];
+const indices_arr = [];
+const address_arr = [];
+const inputs_arr = [];
+const show_arr = [];
 
 class App extends Component {
   state = { loaded: false, cost: 0, itemName: "Example Item", 
@@ -64,12 +64,12 @@ class App extends Component {
        names[i] = data[0];
        prices[i] = data[1];
        amounts[i] = data[2];
-       indices[i] = i;
-       address[i] = data[3];
-       inputs[i] = 0;
-       show[i] = data[4];
+       indices_arr[i] = i;
+       address_arr[i] = data[3];
+       inputs_arr[i] = 0;
+       show_arr[i] = data[4];
     }
-       this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address: address, inputs: inputs, show: show})
+       this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices_arr, address: address_arr, inputs: inputs_arr, show: show_arr})
   
       //  productMap.set(i, {itemName: data[0], cost: data[1], quantity: data[2]});
       //setValues([...i, {itemName: data[0], cost: data[1], quantity: data[2] }]);
@@ -87,8 +87,8 @@ class App extends Component {
     else {
     let result = await this.ItemManager.methods.createItem(itemName, cost, quantity).send({ from: this.accounts[0] });
     const index = result.events.ProductStep.returnValues._productIndex;
-    names[index] = itemName; prices[index] = cost; amounts[index] = quantity; indices[index] = index; address[index] = result.events.ProductStep.returnValues._address;
-    show[index] = true;
+    names[index] = itemName; prices[index] = cost; amounts[index] = quantity; indices[index] = index; address_arr[index] = result.events.ProductStep.returnValues._address;
+    show_arr[index] = true;
     this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address:address, show: show})
     alert("Send "+cost+" Wei to "+result.events.ProductStep.returnValues._address);
     }
@@ -233,6 +233,8 @@ class App extends Component {
   } 
 
   render() {
+
+    const {indices, itemNames} = this.state;
     
     if (!this.state.loaded) {
       return <div className="App">Loading Web3, accounts, and contract...<br></br>
@@ -287,11 +289,19 @@ class App extends Component {
         <div id="updates">
 
         <h1>Add a new product!</h1>
-        Cost: <input type="text" className='input-bx' name="cost" value={this.state.cost} onChange={this.handleInputChange} />
+        Cost: <input type="number" className='input-bx' name="cost" value={this.state.cost} onChange={this.handleInputChange} />
         &nbsp;Product Name: <input type="text" className='input-bx' name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
-        &nbsp;Quantity: <input type="text" className='input-bx' name="quantity" value={this.state.quantity} onChange={this.handleInputChange} />
+        &nbsp;Quantity: <input type="number" className='input-bx' name="quantity" value={this.state.quantity} onChange={this.handleInputChange} />
         &nbsp;<button type="button" className='create-btn' onClick={this.handleSubmit}>Create new Item</button>
         <br></br>
+
+        <select onChange={this.handleInputChange}>
+         {itemNames.map(names => {
+           return (
+             <option value={names}> {names} </option>
+           )
+         })}
+        </select>
 
         <h1>Edit Items: Enter Product Index or name</h1>
         Index: <input type="number" className='input-bx' name="index" value={this.state.index} onChange={this.handleEditChange} />
