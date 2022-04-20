@@ -20,8 +20,8 @@ const show_arr = [];
 
 class App extends Component {
   state = { loaded: false, cost: 0, itemName: "Example Item", 
-  quantity: 0, index: 0, uquantity: 0, itemName_ind: "Example Item", uname: "New Name", ucost: 0,
-  itemNames: [], costs:[], quantities:[], indices:[], address:[], inputs:[], show:[], tableIndex: []};
+  quantity: 0, index: 0, uquantity: 0, itemName_ind: "Example Item", uname: "New Name", ucost: 0, buyIndex: 0.5,
+  itemNames: [], costs:[], quantities:[], indices:[], address:[], input:0, show:[], tableIndex: []};
 
   componentDidMount = async () => {
     try {
@@ -66,10 +66,9 @@ class App extends Component {
        amounts[i] = data[2];
        indices_arr[i] = i;
        address_arr[i] = data[3];
-       inputs_arr[i] = 0;
        show_arr[i] = data[4];
     }
-       this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices_arr, address: address_arr, inputs: inputs_arr, show: show_arr})
+       this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices_arr, address: address_arr, show: show_arr})
   
       //  productMap.set(i, {itemName: data[0], cost: data[1], quantity: data[2]});
       //setValues([...i, {itemName: data[0], cost: data[1], quantity: data[2] }]);
@@ -197,6 +196,25 @@ class App extends Component {
     this.setState({itemNames_ind: value});
   }
 
+  setBuyIndex = (event) => {
+    const { itemNames } = this.state;
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    //const name = target.name;
+
+    if(itemNames.includes(value)){
+    for (let i=0; i<itemNames.length; i++){
+      if (itemNames[i] === value){
+        const index_i = i;
+        this.setState({buyIndex: index_i});
+      }
+    }
+  }
+    else {
+    alert("The item name was not found")
+    }
+  }
+
   handleQtyChange = (event) => {
     const {inputs} = this.state;
     const target = event.target;
@@ -220,20 +238,20 @@ class App extends Component {
     });
   }
 
-  buyItem =async(ind) => {
-    const { costs, address, inputs } = this.state;
-    if (this.state.quantities[ind] < inputs[ind]) {
+  buyItem =async() => {
+    const { costs, address, inputs, buyIndex } = this.state;
+    if (this.state.quantities[buyIndex] < inputs[buyIndex]) {
       alert("Sorry, there is not enough stock to fulfill this order!");
     }
-    else if(!Number.isInteger(Number(inputs[ind]))){
+    else if(!Number.isInteger(Number(inputs[buyIndex]))){
       alert("Sorry, quantities have to be whole numbers");
     }
     else {
-    const toPay = costs[ind] * inputs[ind];
-    let success = await this.web3.eth.sendTransaction({to: address[ind], from:this.accounts[0], value: Number(toPay)});
+    const toPay = costs[buyIndex] * inputs[buyIndex];
+    let success = await this.web3.eth.sendTransaction({to: address[buyIndex], from:this.accounts[0], value: Number(toPay)});
     if (!success) {alert("Payment unsuccesful")}
-    let data =  await this.ItemManager.methods.productData(ind).call({ from: this.accounts[0] });
-    amounts[ind] = data[2];
+    let data =  await this.ItemManager.methods.productData(buyIndex).call({ from: this.accounts[0] });
+    amounts[buyIndex] = data[2];
     this.setState({quantities: amounts});
     }
   }
@@ -320,16 +338,27 @@ class App extends Component {
                   <td ><strong>{this.state.itemNames[a]}</strong></td>
                   <td ><strong>{this.state.costs[a]} Wei</strong></td>
                   <td ><strong>{this.state.quantities[a]}</strong></td>
-                  <td >
-                    Qty: <input type="number" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={this.handleInputChange} />
+                  {/* <td >
+                    Qty: <input type="number" className='table-input' name="inputs" value={this.state.inputs[a]} onInput={this.setInputs(a)} onChange={this.handleInputChange} />
                     <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
           </tbody>
         </table> 
         </div>
         <br></br>
+
+        <h1>Buy an item!</h1>
+        Item:<select className='input-bx' onChange={this.setBuyIndex}>
+         {itemNames.map(names => {
+           return (
+             <option value={names}> {names} </option>
+           )
+         })}
+        </select>
+        Qty: <input type="number" className='table-input' name="inputs" value={this.state.input} onChange={this.handleInputChange} />
+          <button type="button" className='buy-btn' onClick={this.buyItem}> Buy!</button>
 
         <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 100, marginRight: 100 }}></div>
         <button id="toggle" type="button" className= 'updates-btn' onClick={this.hideUpdates}>Show/Hide owner section</button>
