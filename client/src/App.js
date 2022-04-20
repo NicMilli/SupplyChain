@@ -47,7 +47,7 @@ class App extends Component {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.listenToPaymentEvent();
-      this.setState({ loaded:true }, this.getProducts, this.buildTable);
+      this.setState({ loaded:true }, this.getProducts);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -69,7 +69,8 @@ class App extends Component {
        show_arr[i] = data[4];
     }
        this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices_arr, address: address_arr, show: show_arr})
-  
+       this.buildTable();
+       console.log(show_arr)
       //  productMap.set(i, {itemName: data[0], cost: data[1], quantity: data[2]});
       //setValues([...i, {itemName: data[0], cost: data[1], quantity: data[2] }]);
   }
@@ -78,8 +79,9 @@ class App extends Component {
        const {quantities, show} = this.state;
        const ind = [];
        for (let i=0; i<quantities.length; i++) {
-         if (quantities[i] !== 0 && show[i] === true) {
-           ind[i] = i;
+         if (quantities[i] !== 0) {
+          const j = i; 
+          ind[i] = j;
          }
        }
        this.setState({tableIndex: ind})
@@ -357,7 +359,7 @@ class App extends Component {
            )
          })}
         </select>
-        Qty: <input type="number" className='table-input' name="inputs" value={this.state.input} onChange={this.handleInputChange} />
+        Qty: <input type="number" className='table-input' name="input" value={this.state.input} onChange={this.handleInputChange} />
           <button type="button" className='buy-btn' onClick={this.buyItem}> Buy!</button>
 
         <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 100, marginRight: 100 }}></div>
