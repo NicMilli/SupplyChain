@@ -84,6 +84,7 @@ class App extends Component {
          }
        }
        this.setState({tableIndex: ind})
+       console.log(this.state.tableIndex)
   }
 
   handleSubmit = async () => {
@@ -280,7 +281,7 @@ class App extends Component {
 
   render() {
     // const tableIndex = this.filterIndices();
-    const {itemNames} = this.state;
+    const {itemNames, tableIndex} = this.state;
 
     if (!this.state.loaded) {
       return <div className="App">Loading Web3, accounts, and contract...<br></br>
@@ -314,7 +315,7 @@ class App extends Component {
             </tr>
           </thead>
           <tbody className="has-text-black-bis">
-              {this.state.tableIndex.map((a) => (
+              {tableIndex.map((a) => (
                 <tr className="rows">
                   <td ><strong>{this.state.itemNames[a]}</strong></td>
                   <td ><strong>{this.state.costs[a]} Wei</strong></td>
