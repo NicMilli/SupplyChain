@@ -70,7 +70,6 @@ class App extends Component {
     }
        this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices_arr, address: address_arr, show: show_arr})
        this.buildTable();
-       console.log(show_arr)
       //  productMap.set(i, {itemName: data[0], cost: data[1], quantity: data[2]});
       //setValues([...i, {itemName: data[0], cost: data[1], quantity: data[2] }]);
   }
@@ -87,7 +86,6 @@ class App extends Component {
          }
        }
        this.setState({tableIndex: ind, buyNames: reducedNames})
-       console.log(this.state.tableIndex)
   }
 
   handleSubmit = async () => {
