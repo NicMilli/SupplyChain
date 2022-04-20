@@ -321,7 +321,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className='App-header' ><img className='App-logo' src={mylogo} alt="logo"/></header>
-        <h1>Simple Payment/Supply Chain Example!</h1>
+        <h1 style={{fontSize:'22px'}}><strong>Simple Payment/Supply Chain Example!</strong></h1>
         <p>Please let me know if you would like to see any other items listed!<br></br>
         All items are fictional!</p>
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
