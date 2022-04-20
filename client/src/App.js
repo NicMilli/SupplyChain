@@ -15,13 +15,13 @@ const prices = [];
 const amounts = [];
 const indices_arr = [];
 const address_arr = [];
-const inputs_arr = [];
+//const inputs_arr = [];
 const show_arr = [];
 
 class App extends Component {
   state = { loaded: false, cost: 0, itemName: "Example Item", 
   quantity: 0, index: 0, uquantity: 0, itemName_ind: "Example Item", uname: "New Name", ucost: 0, buyIndex: 0.5,
-  itemNames: [], costs:[], quantities:[], indices:[], address:[], input:0, show:[], tableIndex: []};
+  itemNames: [], costs:[], quantities:[], indices:[], address:[], input:0, show:[], tableIndex: [], buyNames:[]};
 
   componentDidMount = async () => {
     try {
@@ -76,15 +76,17 @@ class App extends Component {
   }
 
   buildTable = async() => {
-       const {quantities, show} = this.state;
+       const {quantities, show, itemNames} = this.state;
        const ind = [];
+       const reducedNames =[];
        for (let i=0; i<quantities.length; i++) {
          if (quantities[i] !== 0 && show[i] == true) {
           const j = i; 
           ind[i] = j;
+          reducedNames[i] = itemNames[i];
          }
        }
-       this.setState({tableIndex: ind})
+       this.setState({tableIndex: ind, buyNames: reducedNames})
        console.log(this.state.tableIndex)
   }
 
@@ -102,6 +104,7 @@ class App extends Component {
     names[index] = itemName; prices[index] = cost; amounts[index] = quantity; indices[index] = index; address_arr[index] = result.events.ProductStep.returnValues._address;
     show_arr[index] = true;
     this.setState({itemNames: names, costs: prices, quantities: amounts, indices: indices, address: address_arr, show: show})
+    this.buildTable();
     alert("Send "+cost+" Wei to "+result.events.ProductStep.returnValues._address);
     }
   };
@@ -301,7 +304,7 @@ class App extends Component {
 
   render() {
     // const tableIndex = this.filterIndices();
-    const {itemNames, tableIndex} = this.state;
+    const {itemNames, tableIndex, buyNames} = this.state;
 
     if (!this.state.loaded) {
       return <div className="App">Loading Web3, accounts, and contract...<br></br>
@@ -353,7 +356,7 @@ class App extends Component {
 
         <h1>Buy an item!</h1>
         Item:<select className='input-bx' onChange={this.setBuyIndex}>
-         {itemNames.map(names => {
+         {buyNames.map(names => {
            return (
              <option value={names}> {names} </option>
            )
