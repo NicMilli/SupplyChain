@@ -47,7 +47,7 @@ class App extends Component {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.listenToPaymentEvent();
-      this.setState({ loaded:true }, this.getProducts);
+      this.setState({ loaded:true }, this.getProducts, this.buildTable);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -168,12 +168,12 @@ class App extends Component {
     });
   }
 
-  handleTableInput = (ind) => {
-    const {inputs} = this.state;
+  // handleTableInput = (ind) => {
+  //   const {inputs} = this.state;
 
-    inputs[ind] = "value from table input";
-    this.setState({inputs: inputs}) 
-  }
+  //   inputs[ind] = "value from table input";
+  //   this.setState({inputs: inputs}) 
+  // }
 
   handleDropdownChange = (event) => {
     const { itemName_ind, itemNames } = this.state;
