@@ -21,7 +21,7 @@ const show_arr = [];
 class App extends Component {
   state = { loaded: false, cost: 0, itemName: "Example Item", 
   quantity: 0, index: 0, uquantity: 0, itemName_ind: "Example Item", uname: "New Name", ucost: 0,
-  itemNames: [], costs:[], quantities:[], indices:[], address:[], inputs:[], show:[]};
+  itemNames: [], costs:[], quantities:[], indices:[], address:[], inputs:[], show:[], tableIndex: []};
 
   componentDidMount = async () => {
     try {
@@ -73,7 +73,17 @@ class App extends Component {
   
       //  productMap.set(i, {itemName: data[0], cost: data[1], quantity: data[2]});
       //setValues([...i, {itemName: data[0], cost: data[1], quantity: data[2] }]);
-    
+  }
+
+  buildTable = async() => {
+       const {quantities, show} = this.state;
+       const ind = [];
+       for (let i=0; i<quantities.length; i++) {
+         if (quantities[i] !== 0 && show[i]) {
+           ind[i] = i;
+         }
+       }
+       this.setState({tableIndex: ind})
   }
 
   handleSubmit = async () => {
@@ -211,8 +221,6 @@ class App extends Component {
 
   buyItem =async(ind) => {
     const { costs, address, inputs } = this.state;
-    console.log(this.state.quantities[ind])
-    console.log(inputs[ind])
     if (this.state.quantities[ind] < inputs[ind]) {
       alert("Sorry, there is not enough stock to fulfill this order!");
     }
@@ -272,7 +280,7 @@ class App extends Component {
 
   render() {
     // const tableIndex = this.filterIndices();
-    const {indices, itemNames} = this.state;
+    const {itemNames} = this.state;
 
     if (!this.state.loaded) {
       return <div className="App">Loading Web3, accounts, and contract...<br></br>
@@ -306,13 +314,13 @@ class App extends Component {
             </tr>
           </thead>
           <tbody className="has-text-black-bis">
-              {indices.map((a) => (
+              {this.state.tableIndex.map((a) => (
                 <tr className="rows">
                   <td ><strong>{this.state.itemNames[a]}</strong></td>
                   <td ><strong>{this.state.costs[a]} Wei</strong></td>
                   <td ><strong>{this.state.quantities[a]}</strong></td>
                   <td >
-                    Qty: <input type="number" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={()=>this.handleTableInput(a)} />
+                    Qty: <input type="number" className='table-input' name="inputs" value={this.state.inputs[a]} onChange={this.handleInputChange} />
                     <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
                   </td>
                 </tr>
