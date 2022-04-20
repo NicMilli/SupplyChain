@@ -331,7 +331,7 @@ class App extends Component {
               <th >Product Name:</th>
               <th >Unit Price:</th>
               <th >Quantity Available:</th>
-              <th >Buy!</th>
+              {/* <th >Buy!</th> */}
             </tr>
           </thead>
           <tbody className="has-text-black-bis">
