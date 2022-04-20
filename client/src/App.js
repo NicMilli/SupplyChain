@@ -79,7 +79,7 @@ class App extends Component {
        const {quantities, show} = this.state;
        const ind = [];
        for (let i=0; i<quantities.length; i++) {
-         if (quantities[i] !== 0 && show[i]) {
+         if (quantities[i] !== 0 && show[i] === true) {
            ind[i] = i;
          }
        }
