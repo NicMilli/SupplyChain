@@ -88,7 +88,6 @@ class App extends Component {
           reducedNames.push(itemNames[i]);
          }
        }
-       console.log(reducedNames)
        this.setState({tableIndex: ind, buyNames: reducedNames})
   }
 
@@ -210,8 +209,9 @@ class App extends Component {
 
     if(itemNames.includes(value)){
     for (let i=0; i<itemNames.length; i++){
-      if (itemNames[i] === value){
+      if (itemNames[i] == value){
         const index_i = i;
+        console.log(i)
         this.setState({buyIndex: index_i});
       }
     }
@@ -254,6 +254,7 @@ class App extends Component {
     }
     else {
     const toPay = costs[buyIndex] * input;
+    console.log(toPay)
     let success = await this.web3.eth.sendTransaction({to: address[buyIndex], from:this.accounts[0], value: Number(toPay)});
     if (!success) {alert("Payment unsuccesful")}
     let data =  await this.ItemManager.methods.productData(buyIndex).call({ from: this.accounts[0] });
