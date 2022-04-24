@@ -210,6 +210,7 @@ class App extends Component {
       if (itemNames[i] === value){
         const index_i = i;
         this.setState({buyIndex: index_i});
+        console.log(index_i)
       }
     }
   }
@@ -242,7 +243,7 @@ class App extends Component {
   }
 
   buyItem =async() => {
-    const { costs, address, inputs, buyIndex } = this.state;
+    const { costs, address, input, buyIndex } = this.state;
     if (this.state.quantities[buyIndex] < inputs[buyIndex]) {
       alert("Sorry, there is not enough stock to fulfill this order!");
     }
@@ -250,7 +251,7 @@ class App extends Component {
       alert("Sorry, quantities have to be whole numbers");
     }
     else {
-    const toPay = costs[buyIndex] * inputs[buyIndex];
+    const toPay = costs[buyIndex] * input;
     let success = await this.web3.eth.sendTransaction({to: address[buyIndex], from:this.accounts[0], value: Number(toPay)});
     if (!success) {alert("Payment unsuccesful")}
     let data =  await this.ItemManager.methods.productData(buyIndex).call({ from: this.accounts[0] });
@@ -353,7 +354,7 @@ class App extends Component {
         <br></br>
 
         <h1>Buy an item!</h1>
-        Item:<select className='input-bx' onChange={this.setBuyIndex}>
+        Item:<select className='table-input' onChange={this.setBuyIndex}>
          {buyNames.map(names => {
            return (
              <option value={names}> {names} </option>
