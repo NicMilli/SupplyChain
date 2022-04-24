@@ -85,6 +85,7 @@ class App extends Component {
           reducedNames[i] = itemNames[i];
          }
        }
+       console.log(reducedNames)
        this.setState({tableIndex: ind, buyNames: reducedNames})
   }
 
@@ -210,7 +211,6 @@ class App extends Component {
       if (itemNames[i] === value){
         const index_i = i;
         this.setState({buyIndex: index_i});
-        console.log(index_i)
       }
     }
   }
@@ -243,8 +243,8 @@ class App extends Component {
   }
 
   buyItem =async() => {
-    const { costs, address, input, buyIndex } = this.state;
-    if (this.state.quantities[buyIndex] < input) {
+    const { costs, address, input, buyIndex, quantities } = this.state;
+    if (quantities[buyIndex] < input) {
       alert("Sorry, there is not enough stock to fulfill this order!");
     }
     else if(!Number.isInteger(Number(input))){
@@ -256,6 +256,7 @@ class App extends Component {
     if (!success) {alert("Payment unsuccesful")}
     let data =  await this.ItemManager.methods.productData(buyIndex).call({ from: this.accounts[0] });
     amounts[buyIndex] = data[2];
+    this.buildTable();
     this.setState({quantities: amounts});
     }
   }
@@ -279,6 +280,7 @@ class App extends Component {
     let data =  await this.ItemManager.methods.toggleShow(index).send({ from: this.accounts[0] });
      show[index] = data[0];
      this.setState({show: show});
+     this.buildTable();
   }
 
   hideUpdates = () => {
