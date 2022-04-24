@@ -369,6 +369,8 @@ class App extends Component {
         </select>
         Qty: <input type="number" className='table-input' name="input" value={this.state.input} onChange={this.handleInputChange} />
           <button type="button" className='buy-btn' onClick={this.buyItem}> Buy!</button>
+          <br></br>
+          <br></br>
 
         <div style={{ borderTop: "2px solid #0f0f0f ", marginLeft: 100, marginRight: 100 }}></div>
         <button id="toggle" type="button" className= 'updates-btn' onClick={this.hideUpdates}>Show/Hide owner section</button>
