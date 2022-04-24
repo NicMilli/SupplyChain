@@ -80,12 +80,12 @@ class App extends Component {
        const reducedNames =[];
        for (let i=0; i<quantities.length; i++) {
          if (quantities[i] == 0) {
-            console.log(quantities[i]+" Is out of stock")
+            console.log(itemNames[i]+" Is out of stock")
          }
          else if (quantities[i] !== 0 && show[i] == true) {
           const j = i; 
-          ind[i] = j;
-          reducedNames[i] = itemNames[i];
+          ind.push(j);
+          reducedNames.push(itemNames[i]);
          }
        }
        console.log(reducedNames)
@@ -113,7 +113,6 @@ class App extends Component {
 
   handleUpdate = async (input) => {
     const {index, indices} = this.state;
-    console.log(indices)
     if (index < indices.length){
         if(input === "qty"){
         const { index, uquantity } = this.state;
