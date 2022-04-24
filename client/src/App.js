@@ -79,7 +79,10 @@ class App extends Component {
        const ind = [];
        const reducedNames =[];
        for (let i=0; i<quantities.length; i++) {
-         if (quantities[i] !== 0 && show[i] == true) {
+         if (quantities[i] == 0) {
+            console.log(quantities[i]+" Is out of stock")
+         }
+         else if (quantities[i] !== 0 && show[i] == true) {
           const j = i; 
           ind[i] = j;
           reducedNames[i] = itemNames[i];
