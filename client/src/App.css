@@ -21,7 +21,7 @@ tr{
 }
 
 .rows:hover{
-  background-color: #a25010;
+  background-color: #e8621a;
 }
 
 .columns{
@@ -56,7 +56,7 @@ tr{
 }
 
 .create-btn {
-  background-color: #09d3ac;
+  background-color: #e8621a;
   cursor: pointer; 
   font-size: 15px;
   border-radius: 44px;
@@ -95,7 +95,7 @@ tr{
 }
 
 .table-input {
-  background-color: #a25010;
+  background-color: #e8621a;
 }
 
 .center-table {
