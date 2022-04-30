@@ -343,11 +343,11 @@ class App extends Component {
             </tr>
           </thead>
           <tbody className="has-text-black-bis">
-              {tableIndex.map((a) => (
+              {tableIndex.map((a, ind) => (
                 <tr className="rows">
-                  <td ><strong>{this.state.itemNames[a]}</strong></td>
-                  <td ><strong>{this.state.costs[a]} Wei</strong></td>
-                  <td ><strong>{this.state.quantities[a]}</strong></td>
+                  <td key={ind}><strong>{this.state.itemNames[a]}</strong></td>
+                  <td key={ind}><strong>{this.state.costs[a]} Wei</strong></td>
+                  <td key={ind}><strong>{this.state.quantities[a]}</strong></td>
                   {/* <td >
                     Qty: <input type="number" className='table-input' name="inputs" value={this.state.inputs[a]} onInput={this.setInputs(a)} onChange={this.handleInputChange} />
                     <button type="button" className='buy-btn' onClick={()=>this.buyItem(a)}> Buy!</button>
