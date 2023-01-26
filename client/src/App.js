@@ -19,7 +19,7 @@ const address_arr = [];
 const show_arr = [];
 
 class App extends Component {
-  state = { loaded: false, cost: 0, itemName: "Example Item", 
+  state = { loaded: false, cost: 0, itemName: "Example Item",
   quantity: 0, index: 0, uquantity: 0, itemName_ind: "Example Item", uname: "New Name", ucost: 0, buyIndex: 0.5,
   itemNames: [], costs:[], quantities:[], indices:[], address:[], input:0, show:[], tableIndex: [], buyNames:[]};
 
@@ -33,7 +33,7 @@ class App extends Component {
 
       // Get the contract instance.
       this.networkId = await this.web3.eth.net.getId();
-      
+
       this.ItemManager = new this.web3.eth.Contract(
         ItemManagerContract.abi,
         ItemManagerContract.networks[this.networkId] && ItemManagerContract.networks[this.networkId].address,
@@ -83,7 +83,7 @@ class App extends Component {
             console.log(itemNames[i]+" Is out of stock")
          }
          else if (quantities[i] !== 0 && show[i] == true) {
-          const j = i; 
+          const j = i;
           ind.push(j);
           reducedNames.push(itemNames[i]);
          }
@@ -161,13 +161,13 @@ class App extends Component {
       else{ alert("The index you have chosen does not exist yet!")}
 
 }
-  
+
 
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    
+
     this.setState({
       [name]: value
     });
@@ -177,7 +177,7 @@ class App extends Component {
   //   const {inputs} = this.state;
 
   //   inputs[ind] = "value from table input";
-  //   this.setState({inputs: inputs}) 
+  //   this.setState({inputs: inputs})
   // }
 
   handleDropdownChange = (event) => {
@@ -197,7 +197,7 @@ class App extends Component {
     else {
     alert("The item name was not found")
     }
-    
+
     this.setState({itemNames_ind: value});
   }
 
@@ -227,7 +227,7 @@ class App extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     inputs[name] = value;
-    
+
     this.setState({
       inputs: inputs
     });
@@ -291,16 +291,16 @@ class App extends Component {
     var x = document.getElementById('updates');
     if (x.style.display === 'none') {
         x.style.display = 'block';
-    } 
+    }
     else {
         x.style.display = 'none';
        }
-  } 
+  }
 
   // filterIndices = () => {
   //   const {indices, quantities} = this.state;
   //   const newIndices = [indices, quantities];
-  //   newIndices.filter(function(ind, qty) { 
+  //   newIndices.filter(function(ind, qty) {
   //     return qty !== 0
   // });
   //   console.log(newIndices)
@@ -313,16 +313,16 @@ class App extends Component {
 
     if (!this.state.loaded) {
       return <div className="App">Loading Web3, accounts, and contract...<br></br>
-        <h2>In order to buy coins, please install the metamask plugin on chrome or firefox and connect to the Ropsten test network.</h2> <br></br>
+        <h2>In order to buy coins, please install the metamask plugin on chrome or firefox and connect to the Goerli test network.</h2> <br></br>
         <a href="https://metamask.io/download/">Download Metamask Extension For Your Browser!</a><br></br>
         You may need to show test networks in settings, advanced, show test networks.<br></br><br></br>Find and pin the Metamask extension in your browser<br></br>
-        <img src={extension1} alt="Instructions"></img><br></br>then, select the Ropsten test network<br></br>
+        <img src={extension1} alt="Instructions"></img><br></br>then, select the Goerli test network<br></br>
         <img src={extension2} alt="Instructions"></img><br></br>
         <br></br>You can then select 'buy' and request FREE test Ether from the test faucet.<br></br><br></br>
         <h2>Please refresh the page once connected</h2>
       </div>;
     }
-    
+
     return (
       <div className="App">
         <header className='App-header' ><img className='App-logo' src={mylogo} alt="logo"/></header>
@@ -330,7 +330,7 @@ class App extends Component {
         <p>Please let me know if you would like to see any other items listed!<br></br>
         All items are fictional!</p>
         <h1 style={{textDecorationLine:'underline'}}><strong>Products for sale:</strong></h1>
-        
+
         <br></br>
         <div >
         <table className="center-table" style={{border:'solid',}}>
@@ -355,7 +355,7 @@ class App extends Component {
                 </tr>
               ))}
           </tbody>
-        </table> 
+        </table>
         </div>
         <br></br>
 
@@ -420,7 +420,7 @@ class App extends Component {
         <br></br>
         </div>
 
-        
+
 
         <footer className='App-footer'>Modified by N.Milligan <br></br>
         For Udemy Ethereum Blockchain Developer Bootcamp with Solidity <br></br>
